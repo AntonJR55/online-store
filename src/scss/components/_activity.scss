@@ -1,0 +1,250 @@
+.activity {
+    margin-top: 152px;
+    &__title {
+        width: 492px;
+        height: 43px;
+
+        h2 {
+            font-size: 36px;
+        }
+    }
+
+    &__cards {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 30px;
+        &_item {
+            width: 365px;
+            height: 530px;
+            &-first {
+                width: 100%;
+                height: 100%;
+                border: 1px solid #C4C4C4;
+                img {
+                    width: 294px;
+                    height: 170px;
+                    margin-top: 31px;
+                    margin-left: 32px;
+                }
+                h3 {
+                    font-size: 18px;
+                    margin-top: 39px;
+                    margin-left: 79px;
+                }
+                .first__string {
+                    margin-top: 25px;
+                    margin-left: 25px;
+                    p {
+                        font-size: 15px;
+                        font-weight: 300;
+                    }
+                }
+
+                .second__string {
+                    margin-top: 25px;
+                    margin-left: 25px;
+                    p {
+                        font-size: 15px;
+                        font-weight: 300;
+                    }
+                }
+
+                .third__string {
+                    margin-top: 25px;
+                    margin-left: 25px;
+                    p {
+                        font-size: 15px;
+                        font-weight: 300;
+                    }
+                }
+
+                .fourth__string {
+                    margin-top: 25px;
+                    margin-left: 25px;
+                    p {
+                        font-size: 15px;
+                        font-weight: 300;
+                    }
+                }
+
+                .fifth__string {
+                    width: 40px;
+                    height: 40px;
+                    margin-top: 25px;
+                    margin-left: 25px;
+                  
+                    &_circle { 
+                        width: 40px;
+                        height: 40px;
+                        border-radius: 90px;
+                        background-color: #E30614;
+                    }
+                    &_text {
+                        position: absolute;
+                        width: 75px;
+                        height: 21px;
+                        top: 1427px;
+                        left: 340px;
+                        p {
+                            font-size: 14px;
+                            font-weight: 400;
+                        }
+                    }
+                }
+            }
+
+            &-second {
+                width: 100%;
+                height: 100%;
+                border: 1px solid #C4C4C4;
+                img {
+                    width: 304px;
+                    height: 214px;
+                    margin-top: 22px;
+                    margin-left: 19px;
+                }
+                h3 {
+                    margin-top: 4px;
+                    margin-left: 40px;
+                    font-size: 18px;
+                }
+                .first__string {
+                    margin-top: 25px;
+                    margin-left: 25px;
+                    p {
+                        font-size: 15px;
+                        font-weight: 300;
+                    }
+                }
+
+                .second__string {
+                    margin-top: 25px;
+                    margin-left: 25px;
+                    p {
+                        font-size: 15px;
+                        font-weight: 300;
+                    }
+                }
+
+                .third__string {
+                    margin-top: 25px;
+                    margin-left: 25px;
+                    p {
+                        font-size: 15px;
+                        font-weight: 300;
+                    }
+                }
+
+                .fourth__string {
+                    margin-top: 25px;
+                    margin-left: 25px;
+                    p {
+                        font-size: 15px;
+                        font-weight: 300;
+                    }
+                }
+
+                .fifth__string {
+                    width: 40px;
+                    height: 40px;
+                    margin-top: 25px;
+                    margin-left: 25px;
+                
+                    &_circle { 
+                        width: 40px;
+                        height: 40px;
+                        border-radius: 90px;
+                        background-color: #E30614;
+                    }
+                    &_text {
+                        position: absolute;
+                        width: 75px;
+                        height: 21px;
+                        top: 1427px;
+                        left: 817px;
+                        p {
+                            font-size: 14px;
+                            font-weight: 400;
+                        }
+                    }
+                }
+            }
+
+            &-third {
+                width: 100%;
+                height: 100%;
+                border: 1px solid #C4C4C4;
+                img {
+                    width: 204px;
+                    height: 204px;
+                    margin-top: 14px;
+                    margin-left: 81px;
+                }
+                h3 {
+                    margin-top: 22px;
+                    margin-left: 18px;
+                    font-size: 18px;
+                }
+                .first__string {
+                    margin-top: 25px;
+                    margin-left: 25px;
+                    p {
+                        font-size: 15px;
+                        font-weight: 300;
+                    }
+                }
+
+                .second__string {
+                    margin-top: 25px;
+                    margin-left: 25px;
+                    p {
+                        font-size: 15px;
+                        font-weight: 300;
+                    }
+                }
+
+                .third__string {
+                    margin-top: 25px;
+                    margin-left: 25px;
+                    p {
+                        font-size: 15px;
+                        font-weight: 300;
+                    }
+                }
+
+                .fourth__string {
+                    margin-top: 25px;
+                    margin-left: 25px;
+                    p {
+                        font-size: 15px;
+                        font-weight: 300;
+                    }
+                }
+
+                .fifth__string {
+                    width: 40px;
+                    height: 40px;
+                    margin-top: 25px;
+                    margin-left: 25px;
+                    &_circle { 
+                        width: 40px;
+                        height: 40px;
+                        border-radius: 90px;
+                        background-color: #E30614;
+                    }
+                    &_text {
+                        position: absolute;
+                        width: 75px;
+                        height: 21px;
+                        top: 1427px;
+                        left: 1295px;
+                        p {
+                            font-size: 14px;
+                            font-weight: 400;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

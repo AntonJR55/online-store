@@ -1,0 +1,138 @@
+.background {
+    min-width: 1900px;
+    min-height: 572px;
+    background: url(../../img/background.jpg) center (center/cover) no-repeat;
+
+    &__title {
+        min-width: 532px;
+        min-height: 284px;
+        padding-top: 80px;
+        margin-left: 300px;
+        &_header {
+            min-width: 532px;
+            min-height: 96px;
+            h2 {
+                font-size: 40px;
+                font-weight: 700;
+            }
+        }
+        &_subheader {
+            min-width: 220px;
+            min-height: 120px;
+            h1 {
+                display: inline;
+                font-size: 100px;
+                font-weight: 900;
+                text-shadow: #cad5e2 1px 1px 0, #cad5e2 2px 2px 0, #cad5e2 3px 3px 0, #cad5e2 4px 4px 0, #cad5e2 5px 5px 0;
+                color: #E30614;
+            }
+            h3 {
+                display: inline;
+                margin-left: 28px;
+                font-size: 32px;
+                font-weight: 700;
+            }
+        }
+        &_body {
+            min-width: 406px;
+            min-height: 64px;
+            margin-top: 4px;
+            font-size: 24px;
+            font-weight: 400;
+        }
+    }
+
+    &__detailed {
+        width: 50px;
+        height: 50px;
+        margin-top: 40px;
+        margin-left: 300px;
+        &_circle { 
+            width: 50px;
+            height: 50px;
+            border-radius: 90px;
+            background-color: #E30614;
+        }
+        &_text {
+            position: absolute;
+            width: 75px;
+            height: 21px;
+            top: 575px;
+            left: 333px;
+            p {
+                font-size: 14px;
+                font-weight: 400;
+            }
+        }
+    }
+
+    &__blocks {
+        position: absolute;
+        display: flex;
+        justify-content: space-between;
+        left: 300px;
+        right: 300px;
+        top: 650px;
+        &_item {
+            width: 265px;
+            height: 148px;
+            padding-top: 22px;
+            padding-left: 20px;
+            background: #fff;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.13);
+            border-radius: 5px;
+            &-compromise {
+                img {
+                    width: 49px;
+                    height: 50px;
+                    margin-bottom: 13px;
+                }
+
+                p {
+                    font-size: 18px;
+                    font-weight: 400;
+                }
+            }
+
+            &-complex {
+                img {
+                    width: 42px;
+                    height: 50px;
+                    margin-bottom: 13px;
+                }
+
+                p {
+                    font-size: 18px;
+                    font-weight: 400;
+                    
+                }
+            }
+
+            &-bank {
+                img {
+                    width: 34px;
+                    height: 52px;
+                    margin-bottom: 11px;
+                }
+
+                p {
+                    font-size: 18px;
+                    font-weight: 400;
+                }   
+            }
+
+            &-delivery {
+                img {
+                    width: 56px;
+                    height: 40px;
+                    margin-bottom: 23px;
+                }
+
+                p {
+                    font-size: 18px;
+                    font-weight: 400; 
+                }
+            }
+        }
+    }
+}
