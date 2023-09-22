@@ -1,14 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import firstItem from "../img/firstItem.jpg";
-import secondItem from "../img/secondItem.jpg";
-import thirdItem from "../img/thirdItem.jpg";
-import fourthItem from "../img/fourthItem.jpg";
-import fifthItem from "../img/fifthItem.jpg";
-import sixthItem from "../img/sixthItem.jpg";
-import seventhItem from "../img/seventhItem.jpg";
-import eighthItem from "../img/eighthItem.jpg";
+import data from "../data";
+
 import whiteBasket from "../img/whiteBasket.png";
 
 const Goods = ({
@@ -17,81 +11,6 @@ const Goods = ({
     onAddToCard,
     onCloseNotification,
 }) => {
-
-    const itemInfo = [
-        {
-            id: 1,
-            image: firstItem,
-            standard: "ГОСТ 14911-82",
-            title: "Опора тавровая хомутовая ТХ",
-            initialPrice: 349.9,
-            totalPrice: 349.9,
-            quantity: 1,
-        },
-        {
-            id: 2,
-            image: secondItem,
-            standard: "ГОСТ 14911-83",
-            title: "Опора тавровая хомутовая ТХ",
-            initialPrice: 349.9,
-            totalPrice: 349.9,
-            quantity: 1,
-        },
-        {
-            id: 3,
-            image: thirdItem,
-            standard: "ГОСТ 14911-84",
-            title: "Опора тавровая хомутовая ТХ",
-            initialPrice: 349.9,
-            totalPrice: 349.9,
-            quantity: 1,
-        },
-        {
-            id: 4,
-            image: fourthItem,
-            standard: "ГОСТ 14911-85",
-            title: "Опора тавровая хомутовая ТХ",
-            initialPrice: 349.9,
-            totalPrice: 349.9,
-            quantity: 1,
-        },
-        {
-            id: 5,
-            image: fifthItem,
-            standard: "ГОСТ 14911-82",
-            title: "Опора тавровая хомутовая ТХ",
-            initialPrice: 349.9,
-            totalPrice: 349.9,
-            quantity: 1,
-        },
-        {
-            id: 6,
-            image: sixthItem,
-            standard: "ГОСТ 14911-82",
-            title: "Опора тавровая хомутовая ТХ",
-            initialPrice: 349.9,
-            totalPrice: 349.9,
-            quantity: 1,
-        },
-        {
-            id: 7,
-            image: seventhItem,
-            standard: "ГОСТ 14911-82",
-            title: "Опора тавровая хомутовая ТХ",
-            initialPrice: 349.9,
-            totalPrice: 349.9,
-            quantity: 1,
-        },
-        {
-            id: 8,
-            image: eighthItem,
-            standard: "ГОСТ 14911-82",
-            title: "Опора тавровая хомутовая ТХ",
-            initialPrice: 349.9,
-            totalPrice: 349.9,
-            quantity: 1,
-        },
-    ];
 
     return (
         <div className="container">
@@ -107,7 +26,7 @@ const Goods = ({
                     </div>
                 </div>
                 <div className="goods__cards">
-                    {itemInfo.map((item) => (
+                    {data.map((item) => (
                         <div key={item.id} className="goods__cards_item">
                             <div className="goods__cards_item-img">
                                 <img src={item.image} alt="Item" />

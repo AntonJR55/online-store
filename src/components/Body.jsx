@@ -8,7 +8,7 @@ import minus from "../img/minus.png";
 import remove from "../img/remove.png";
 import basket from "../img/bsk.png";
 
-const Body = ({ cardItem }) => {
+const Body = ({ cardItem, onDeleteItem, onDeleteItemsAll }) => {
     const [data, setData] = React.useState(cardItem);
     const [totalPrice, setTotalPrice] = React.useState(0);
 
@@ -34,11 +34,13 @@ const Body = ({ cardItem }) => {
     const deleteItem = (itemId) => {
         setData((prevData) =>
             prevData.filter(item => item.id !== itemId) 
-        )
+        );
+        onDeleteItem(itemId);
     }
 
-    const deleteItemAll = () => {
+    const deleteItemsAll = () => {
         setData([]);
+        onDeleteItemsAll();
     }
 
     return (
@@ -115,7 +117,7 @@ const Body = ({ cardItem }) => {
                             <div className="list__clean_img">
                                 <img src={remove} alt="Basket" />
                             </div>
-                            <div className="list__clean_text" onClick={deleteItemAll}>
+                            <div className="list__clean_text" onClick={deleteItemsAll}>
                                 <span>Очистить корзину</span>
                             </div>
                         </div>
