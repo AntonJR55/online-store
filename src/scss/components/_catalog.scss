@@ -322,4 +322,23 @@
             }
         }
     }
+    .pageSelection {
+        display: flex;
+        justify-content: space-between;
+        &_filter {
+            display: flex;
+            &__value {
+                display: flex;
+                &-item {
+                    margin-left: 5px;
+                }
+            }
+        }
+        &_transition {
+            display: flex;
+        }
+        .transition_pageNumbers {
+            display: flex;
+        }
+    }
 }
