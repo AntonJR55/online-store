@@ -1,17 +1,17 @@
-import first from '../img/first.jpg';
-import second from '../img/second.jpg';
-import third from '../img/third.jpg';
+import first from '../../img/first.jpg';
+import second from '../../img/second.jpg';
+import third from '../../img/third.jpg';
 
-const Activity = () => {
+const AreasOfActivity = () => {
     return (
         <div className="container">
-            <div className="activity">
-                <div className="activity__title">
+            <div className="areasOfActivity">
+                <div className="areasOfActivity__title">
                     <h2>Направления деятельности</h2>
                 </div>
-                <div className="activity__cards">
-                    <div className="activity__cards_item">
-                        <div className="activity__cards_item-first">
+                <div className="areasOfActivity__cards">
+                    <div className="areasOfActivity__cards_item">
+                        <div className="areasOfActivity__cards_item-first">
                             <img src={first} alt="Metal products" />
                             <h3>Металлические изделия</h3>
                             <div className="first__string">
@@ -34,8 +34,8 @@ const Activity = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="activity__cards_item">
-                        <div className="activity__cards_item-second">
+                    <div className="areasOfActivity__cards_item">
+                        <div className="areasOfActivity__cards_item-second">
                             <img src={second} alt="Fire-fighting equipment" />
                             <h3>Противопожарное оборудование</h3>
                             <div className="first__string">
@@ -58,8 +58,8 @@ const Activity = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="activity__cards_item">
-                        <div className="activity__cards_item-third">
+                    <div className="areasOfActivity__cards_item">
+                        <div className="areasOfActivity__cards_item-third">
                             <img src={third} alt="Design of metal structures" />
                             <h3>Проектирование металлоконструкций</h3>
                             <div className="first__string">
@@ -88,4 +88,4 @@ const Activity = () => {
     )
 }
 
-export default Activity;
+export default AreasOfActivity;

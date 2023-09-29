@@ -1,0 +1,154 @@
+.catalogPage {
+    margin-left: 300px;
+    &_panel {
+        display: flex;
+    }
+
+    .navigation {
+        margin-top: 40px;
+        display: flex;
+
+        &__main {
+            a {
+                text-decoration: none;
+                color: #b3b3b3;
+            }
+        }
+
+        &__arrow {
+            margin-left: 20px;
+
+            img {
+                width: 10px;
+                height: 10px;
+            }
+        }
+
+        &__catalog {
+            margin-left: 20px;
+        }
+    }
+
+    .title {
+        margin-top: 20px;
+    }
+    @import "./catalogFilters";
+    @import "./catalogList";
+    .item_parameters {
+        margin-left: 32px;
+        .parameters_caption {
+            display: flex;
+            .caption_standard {
+                width: 83px;
+                height: 20px;
+                text-align: center;
+                border-radius: 2px;
+                background-color: #f3bcc0;
+                span {
+                    font-size: 10px;
+                    color: #e30614;
+                }
+            }
+            .caption_name {
+                width: 326px;
+                margin-left: 10px;
+                span {
+                    font-size: 18px;
+                    font-weight: 600;
+                }
+            }
+        }
+        .parameters_type {
+            .type_line {
+                width: 250px;
+                height: 1px;
+                margin-top: 15px;
+                background-color: #e6e6e6;
+            }
+        }
+        .parameters_verticalLoad {
+            .verticalLoad_line {
+                width: 115px;
+                height: 1px;
+                margin-top: 15px;
+                background-color: #e6e6e6;
+            }
+        }
+        .parameters_diameter {
+            .diameter_line {
+                width: 180px;
+                height: 1px;
+                margin-top: 15px;
+                background-color: #e6e6e6;
+            }
+        }
+        .parameters_supportWidth {
+            .supportWidth_line {
+                width: 160px;
+                height: 1px;
+                margin-top: 15px;
+                background-color: #e6e6e6;
+            }
+        }
+        .parameters_blocksMass {
+            .blocksMass_line {
+                width: 175px;
+                height: 1px;
+                margin-top: 15px;
+                background-color: #e6e6e6;
+            }
+        }
+        .parameters_partNumber {
+            .partNumber_line {
+                width: 225px;
+                height: 1px;
+                margin-top: 15px;
+                background-color: #e6e6e6;
+            }
+        }
+        .parameters_measurementUnit {
+            .measurementUnit_line {
+                width: 155px;
+                height: 1px;
+                margin-top: 15px;
+                background-color: #e6e6e6;
+            }
+        }
+    }
+    .parameter {
+        display: flex;
+        margin-top: 10px;
+        .parameters_text {
+            span {
+                font-size: 12px;
+                font-weight: 400;
+                color: #b3b3b3;
+            }
+        }
+        .parameters_value {
+            span {
+                font-size: 12px;
+                font-weight: 400;
+            }
+        }
+    }
+    .pageSelection {
+        display: flex;
+        justify-content: space-between;
+        &_filter {
+            display: flex;
+            &__value {
+                display: flex;
+                &-item {
+                    margin-left: 5px;
+                }
+            }
+        }
+        &_transition {
+            display: flex;
+        }
+        .transition_pageNumbers {
+            display: flex;
+        }
+    }
+}

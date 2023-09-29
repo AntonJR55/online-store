@@ -1,11 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import data from "../data";
+import data from "../../data/data";
 
-import whiteBasket from "../img/whiteBasket.png";
+import whiteBasket from "../../icons/whiteBasket.png";
 
-const Goods = ({
+const PopularProducts = ({
     showNotification,
     cardInNotification,
     onAddToCard,
@@ -14,39 +14,39 @@ const Goods = ({
 
     return (
         <div className="container">
-            <div className="goods">
-                <div className="goods__header">
-                    <div className="goods__header_title">
+            <div className="popularProducts">
+                <div className="popularProducts__header">
+                    <div className="popularProducts__header_title">
                         <h2>Популярные товары</h2>
                     </div>
-                    <div className="goods__header_catalog">
+                    <div className="popularProducts__header_catalog">
                         <button>
                             <span>Перейти в каталог</span>
                         </button>
                     </div>
                 </div>
-                <div className="goods__cards">
+                <div className="popularProducts__cards">
                     {data.map((item) => (
-                        <div key={item.id} className="goods__cards_item">
-                            <div className="goods__cards_item-img">
+                        <div key={item.id} className="popularProducts__cards_item">
+                            <div className="popularProducts__cards_item-img">
                                 <img src={item.image} alt="Item" />
                             </div>
-                            <div className="goods__cards_item-standard">
+                            <div className="popularProducts__cards_item-standard">
                                 <span>{item.standard}</span>
                             </div>
-                            <div className="goods__cards_item-title">
+                            <div className="popularProducts__cards_item-title">
                                 <span>{item.title}</span>
                             </div>
-                            <div className="goods__cards_item-cost">
+                            <div className="popularProducts__cards_item-cost">
                                 <span>{item.initialPrice}</span>
                             </div>
-                            <div className="goods__cards_item-basket">
+                            <div className="popularProducts__cards_item-basket">
                                 <button onClick={() => onAddToCard(item)}>
                                     <img src={whiteBasket} alt="Basket" />
                                     <span>В корзину</span>
                                 </button>
                             </div>
-                            <div className="goods__cards_item-detailed">
+                            <div className="popularProducts__cards_item-detailed">
                                 <button>
                                     <span>Подробнее</span>
                                 </button>
@@ -103,4 +103,4 @@ const Goods = ({
     );
 };
 
-export default Goods;
+export default PopularProducts;

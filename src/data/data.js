@@ -1,11 +1,11 @@
-import firstItem from "./img/firstItem.jpg";
-import secondItem from "./img/secondItem.jpg";
-import thirdItem from "./img/thirdItem.jpg";
-import fourthItem from "./img/fourthItem.jpg";
-import fifthItem from "./img/fifthItem.jpg";
-import sixthItem from "./img/sixthItem.jpg";
-import seventhItem from "./img/seventhItem.jpg";
-import eighthItem from "./img/eighthItem.jpg";
+import firstItem from "../img/firstItem.jpg";
+import secondItem from "../img/secondItem.jpg";
+import thirdItem from "../img/thirdItem.jpg";
+import fourthItem from "../img/fourthItem.jpg";
+import fifthItem from "../img/fifthItem.jpg";
+import sixthItem from "../img/sixthItem.jpg";
+import seventhItem from "../img/seventhItem.jpg";
+import eighthItem from "../img/eighthItem.jpg";
 
 const itemInfo = [
     {

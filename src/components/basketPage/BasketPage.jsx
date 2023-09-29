@@ -2,13 +2,13 @@ import React from "react";
 
 import { Link } from "react-router-dom";
 
-import arrow from "../img/arrow.png";
-import plus from "../img/plus.png";
-import minus from "../img/minus.png";
-import remove from "../img/remove.png";
-import basket from "../img/bsk.png";
+import arrow from "../../icons/arrow.png";
+import plus from "../../icons/plus.png";
+import minus from "../../icons/minus.png";
+import remove from "../../icons/remove.png";
+import ContactsForm from "./ContactsForm";
 
-const Body = ({ cardItem, onDeleteItem, onDeleteItemsAll }) => {
+const BasketPage = ({ cardItem, onDeleteItem, onDeleteItemsAll }) => {
     const [data, setData] = React.useState(cardItem);
     const [totalPrice, setTotalPrice] = React.useState(0);
 
@@ -44,7 +44,7 @@ const Body = ({ cardItem, onDeleteItem, onDeleteItemsAll }) => {
     }
 
     return (
-        <div className="body">
+        <div className="basketPage">
             <div className="navigation">
                 <div className="navigation__main">
                     <Link to={`/`}>Главная</Link>
@@ -122,66 +122,11 @@ const Body = ({ cardItem, onDeleteItem, onDeleteItemsAll }) => {
                             </div>
                         </div>
                     </div>
-                    <div className="contacts">
-                        <div className="contacts__title">
-                            <span>Контактная информация</span>
-                        </div>
-                        <form action="submit">
-                            <input
-                                type="text"
-                                className="name"
-                                placeholder="ФИО"
-                            />
-                            <input
-                                type="text"
-                                className="telephone"
-                                placeholder="Контактный телефон"
-                            />
-                            <input
-                                type="text"
-                                className="email"
-                                placeholder="Email"
-                            />
-                            <input
-                                type="text"
-                                className="organization"
-                                placeholder="Организация / ИНН"
-                            />
-                            <input
-                                type="text"
-                                className="address"
-                                placeholder="Адрес доставки"
-                            />
-                            <input
-                                type="text"
-                                className="code"
-                                placeholder="Введите промокод"
-                            />
-                            <button className="apply">
-                                <span>Применить</span>
-                            </button>
-                        </form>
-                        <div className="contacts__total">
-                            <div className="contacts__total_text">
-                                <span>Итого</span>
-                            </div>
-                            <div className="contacts__total_number">
-                                <span>{totalPrice} бел.руб</span>
-                            </div>
-                        </div>
-                        <button className="contacts__register">
-                            <div className="contacts__register_img">
-                                <img src={basket} alt="basket" />
-                            </div>
-                            <div className="contacts__register_text">
-                                <span>Оформить заказ</span>
-                            </div>
-                        </button>
-                    </div>
+                    <ContactsForm totalPrice={totalPrice} />
                 </div>
             </div>
         </div>
     );
 };
 
-export default Body;
+export default BasketPage;

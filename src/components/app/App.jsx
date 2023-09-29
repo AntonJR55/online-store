@@ -2,16 +2,14 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import React from "react";
 
-import Header from "./components/Header";
-import Subheader from "./components/Subheader";
-import Background from "./components/Background";
-import Activity from "./components/Activity";
-import Goods from "./components/Goods";
-import Footer from "./components/Footer";
-import Body from "./components/Body";
-import Catalog from "./components/Catalog";
+import Header from "../header/Header";
+import Subheader from "../subheader/Subheader";
+import Footer from "../footer/Footer";
+import BasketPage from "../basketPage/BasketPage";
+import CatalogPage from "../catalogPage/CatalogPage";
 
-import "./scss/app.scss";
+import "../../scss/index.scss";
+import MainPage from "../mainPage/MainPage";
 
 function App() {
     const [cardInNotification, setCardInNotification] = React.useState();
@@ -54,17 +52,12 @@ function App() {
                         path="/"
                         element={
                             <>
-                                <Header />
-                                <Subheader />
-                                <Background />
-                                <Activity />
-                                <Goods
-                                    showNotification={showNotification}
+                                <MainPage
+                                    showNotification={showNotification} 
                                     cardInNotification={cardInNotification}
                                     onAddToCard={handleAddToCard}
                                     onCloseNotification={closeNotification}
                                 />
-                                <Footer />
                             </>
                         }
                     />
@@ -74,7 +67,7 @@ function App() {
                             <>
                                 <Header />
                                 <Subheader />
-                                <Body
+                                <BasketPage
                                     cardItem={cardItem}
                                     onDeleteItemsAll={deleteItemsAll}
                                     onDeleteItem={deleteItem}
@@ -89,7 +82,7 @@ function App() {
                             <>
                                 <Header />
                                 <Subheader />
-                                <Catalog />
+                                <CatalogPage />
                             </>
                         }
                     />
