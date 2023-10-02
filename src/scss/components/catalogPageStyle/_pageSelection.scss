@@ -1,0 +1,71 @@
+.pageSelection {
+    width: 978px;
+    height: 35;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 35px;
+    &_filter {
+        display: flex;
+        align-items: center;
+        &__text {
+            span {
+                font-size: 17px;
+            }
+        }
+        &__value {
+            display: flex;
+            margin-left: 5px;
+            &-item {
+                margin-left: 10px;
+                cursor: pointer;
+                span {
+                    font-size: 17px;
+                }
+            }
+        }
+    }
+    &_transition {
+        display: flex;
+    }
+    .transition_next {
+        width: 35px;
+        height: 35px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid #e6e6e6;
+    }
+    .transition_prev {
+        width: 35px;
+        height: 35px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid #e6e6e6;
+    }
+    .transition_pageNumbers {
+        display: flex;
+        &-number {
+            width: 35px;
+            height: 35px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid #e6e6e6;
+            span {
+                color: #B3B3B3;
+            }
+        }
+    }
+    .transition_showAll {
+        width: 150px;
+        height: 35px;
+        display: flex;
+        align-items: center;
+        margin-left: 35px;
+        span {
+            font-size: 15px;
+            color: #E30614;
+        }
+    }
+}

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from "react";
 
 import PageSelection from "./PageSelection";
 
@@ -10,17 +10,21 @@ import whiteBasket from "../../icons/whiteBasket.png";
 
 const CatalogList = () => {
     const [startIndex, setStartIndex] = useState(0);
-    const endIndex = startIndex + 5;
+
+    const itemsOnPage = 5;
+    const endIndex = startIndex + itemsOnPage;
+    const totalPages = Math.ceil(data.length / itemsOnPage); 
+    console.log(totalPages);
 
     const nextPage = () => {
         if (endIndex < data.length) {
-            setStartIndex(startIndex + 5);
+            setStartIndex(startIndex + itemsOnPage);
         }
     };
 
     const prevPage = () => {
         if (startIndex > 0) {
-            setStartIndex(startIndex - 5);
+            setStartIndex(startIndex - itemsOnPage);
         }
     };
 
@@ -138,7 +142,7 @@ const CatalogList = () => {
                     </div>
                 </div>
             ))}
-            <PageSelection onNext={nextPage} onPrev={prevPage} />
+            <PageSelection totalPages={totalPages} onNext={nextPage} onPrev={prevPage} />
         </div>
     );
 };
