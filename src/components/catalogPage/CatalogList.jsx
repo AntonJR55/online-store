@@ -10,25 +10,39 @@ import whiteBasket from "../../icons/whiteBasket.png";
 
 const CatalogList = () => {
     const [startIndex, setStartIndex] = useState(0);
+    const [quantityOfItems, setQuantityOfItems] = useState(5);
 
-    const itemsOnPage = 5;
-    const endIndex = startIndex + itemsOnPage;
-    const totalPages = Math.ceil(data.length / itemsOnPage); 
-    console.log(totalPages);
+    const endIndex = startIndex + quantityOfItems;
+    const totalPages = Math.ceil(data.length / quantityOfItems);
 
-    const nextPage = () => {
-        if (endIndex < data.length) {
-            setStartIndex(startIndex + itemsOnPage);
+    const quantityOfItemsHandler = (activeItem) => {
+        switch (activeItem) {
+            case "first-item":
+                setQuantityOfItems(5);
+                break;
+            case "second-item":
+                setQuantityOfItems(10);
+                break;
+            default:
+                setQuantityOfItems(15);
+                break;
         }
     };
 
     const prevPage = () => {
         if (startIndex > 0) {
-            setStartIndex(startIndex - itemsOnPage);
+            setStartIndex(startIndex - quantityOfItems);
+        }
+    };
+
+    const nextPage = () => {
+        if (endIndex < data.length) {
+            setStartIndex(startIndex + quantityOfItems);
         }
     };
 
     const displayedItems = data.slice(startIndex, endIndex);
+
     return (
         <div className="catalogList">
             {displayedItems.map((item) => (
@@ -142,7 +156,12 @@ const CatalogList = () => {
                     </div>
                 </div>
             ))}
-            <PageSelection totalPages={totalPages} onNext={nextPage} onPrev={prevPage} />
+            <PageSelection
+                totalPages={totalPages}
+                onNext={nextPage}
+                onPrev={prevPage}
+                onQuantityHandler={quantityOfItemsHandler}
+            />
         </div>
     );
 };

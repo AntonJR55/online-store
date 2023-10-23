@@ -1,6 +1,11 @@
+import { useState } from "react";
+
 import filter from "../../icons/filter.png";
+import chevronDown from "../../icons/chevron-down.png";
+import chevronUp from "../../icons/chevron-up.png";
 
 const CatalogFilters = () => {
+    const [showValues, setShowValues] = useState(false);
     return (
         <div className="catalogFilters">
             <div className="caption">
@@ -26,17 +31,48 @@ const CatalogFilters = () => {
                     </div>
                 </div>
                 <div className="params_type">
-                    <div className="params_type__text">
-                        <span>Тип продукта</span>
+                    <div className="params_type__header">
+                        <div className="params_type__title">
+                            <span>Тип продукта</span>
+                        </div>
+                        {showValues ? (
+                            <div className="params_type__icon" onClick={() => setShowValues(false)}>
+                                <img src={chevronUp} alt="Chevron" />
+                            </div>
+                        ) : (
+                            <div className="params_type__icon" onClick={() => setShowValues(true)}>
+                                <img src={chevronDown} alt="Chevron" />
+                            </div>
+                        )}
                     </div>
-                    <div className="params_type__select">
-                        <select>
-                            <option value=""></option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                        </select>
-                    </div>
+                    {showValues && (
+                        <div className="params_type__body">
+                            <div className="params_type__value">
+                                <div className="params_type__checkbox">
+                                    <input type="checkbox" id="first-checkbox" />
+                                </div>
+                                <div className="params_type__text">
+                                    <span>1</span>
+                                </div>
+                            </div>
+                            <div className="params_type__value">
+                                <div className="params_type__checkbox">
+                                    <input type="checkbox" id="second-checkbox" />
+                                </div>
+                                <div className="params_type__text">
+                                    <span>2</span>
+                                </div>
+                            </div>
+                            <div className="params_type__value">
+                                <div className="params_type__checkbox">
+                                    <input type="checkbox" id="third-checkbox" />
+                                </div>
+                                <div className="params_type__text">
+                                    <span>3</span>
+                                </div>
+                            </div>
+                        </div>
+                    )}
                 </div>
                 <div className="params_popularity">
                     <div className="params_popularity__text">

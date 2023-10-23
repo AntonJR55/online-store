@@ -1,10 +1,14 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import arrowLeft from "../../icons/arrow-left.png";
 import arrowRight from "../../icons/arrow-right.png";
 
-const PageSelection = ({ totalPages, onNext, onPrev }) => {
+const PageSelection = ({ totalPages, onPrev, onNext, onQuantityHandler }) => {
     const [active, setActive] = useState("first-item");
+    
+    useEffect(() => {
+        onQuantityHandler(active);
+    }, [active])
 
     const pageNumbers = [];
 
