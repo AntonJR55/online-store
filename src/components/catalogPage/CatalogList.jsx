@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import PageSelection from "./PageSelection";
 
@@ -8,9 +8,60 @@ import plus from "../../icons/plus.png";
 import minus from "../../icons/minus.png";
 import whiteBasket from "../../icons/whiteBasket.png";
 
-const CatalogList = () => {
+const CatalogList = ({ popularityValue, typeValue }) => {
     const [startIndex, setStartIndex] = useState(0);
     const [quantityOfItems, setQuantityOfItems] = useState(5);
+    const [goods, setGoods] = useState(data);
+
+    useEffect(() => {
+        const sorted = [...goods];
+
+        switch (popularityValue) {
+            case "asc":
+                sorted.sort((a, b) => a.popularity - b.popularity);
+                setGoods(sorted);
+                break;
+            case "desc":
+                sorted.sort((a, b) => b.popularity - a.popularity);
+                setGoods(sorted);
+                break;
+            default:
+                setGoods(data);
+                break;
+        }
+    }, [popularityValue]);
+
+    useEffect(() => {
+        const filtered = [...goods];
+        
+        switch (typeValue) {
+            case 1:
+                filtered.filter((item) => (item.type = 1));
+                setGoods(filtered);
+                break;
+            case 2:
+                filtered.filter((item) => (item.type = 2));
+                setGoods(filtered);
+                break;
+            case 3:
+                filtered.filter((item) => (item.type = 3));
+                setGoods(filtered);
+                break;
+            case 4:
+                filtered.filter((item) => (item.type = 4));
+                setGoods(filtered);
+                break;
+            case 5:
+                filtered.filter((item) => (item.type = 5));
+                setGoods(filtered);
+                break;
+            default:
+                setGoods(data);
+                break;
+        }
+
+        console.log(filtered)
+    }, [typeValue])
 
     const endIndex = startIndex + quantityOfItems;
     const totalPages = Math.ceil(data.length / quantityOfItems);
@@ -41,7 +92,7 @@ const CatalogList = () => {
         }
     };
 
-    const displayedItems = data.slice(startIndex, endIndex);
+    const displayedItems = goods.slice(startIndex, endIndex);
 
     return (
         <div className="catalogList">
@@ -158,9 +209,9 @@ const CatalogList = () => {
             ))}
             <PageSelection
                 totalPages={totalPages}
+                onQuantityHandler={quantityOfItemsHandler}
                 onNext={nextPage}
                 onPrev={prevPage}
-                onQuantityHandler={quantityOfItemsHandler}
             />
         </div>
     );

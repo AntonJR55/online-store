@@ -22,7 +22,8 @@ const itemInfo = [
         supportWidth: 860,
         blocksMass: 150,
         partNumber: "VS13421",
-        measurementUnit: "шт"
+        measurementUnit: "шт",
+        popularity: 2
     },
     {
         id: 2,
@@ -38,7 +39,8 @@ const itemInfo = [
         supportWidth: 260,
         blocksMass: 50,
         partNumber: "VS13422",
-        measurementUnit: "шт"
+        measurementUnit: "шт",
+        popularity: 1
     },
     {
         id: 3,
@@ -54,7 +56,8 @@ const itemInfo = [
         supportWidth: 460,
         blocksMass: 71,
         partNumber: "VS13423",
-        measurementUnit: "шт"
+        measurementUnit: "шт",
+        popularity: 1
     },
     {
         id: 4,
@@ -70,7 +73,8 @@ const itemInfo = [
         supportWidth: 490,
         blocksMass: 80,
         partNumber: "VS13424",
-        measurementUnit: "шт"
+        measurementUnit: "шт",
+        popularity: 4
     },
     {
         id: 5,
@@ -86,7 +90,8 @@ const itemInfo = [
         supportWidth: 500,
         blocksMass: 90,
         partNumber: "VS13425",
-        measurementUnit: "шт"
+        measurementUnit: "шт",
+        popularity: 5
     },
     {
         id: 6,
@@ -102,7 +107,8 @@ const itemInfo = [
         supportWidth: 460,
         blocksMass: 71,
         partNumber: "VS13426",
-        measurementUnit: "шт"
+        measurementUnit: "шт",
+        popularity: 6
     },
     {
         id: 7,
@@ -118,7 +124,8 @@ const itemInfo = [
         supportWidth: 500,
         blocksMass: 90,
         partNumber: "VS13427",
-        measurementUnit: "шт"
+        measurementUnit: "шт",
+        popularity: 3
     },
     {
         id: 8,
@@ -134,7 +141,8 @@ const itemInfo = [
         supportWidth: 860,
         blocksMass: 150,
         partNumber: "VS13428",
-        measurementUnit: "шт"
+        measurementUnit: "шт", 
+        popularity: 5
     },
 ]
 
