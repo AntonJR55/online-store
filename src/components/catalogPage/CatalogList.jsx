@@ -8,7 +8,7 @@ import plus from "../../icons/plus.png";
 import minus from "../../icons/minus.png";
 import whiteBasket from "../../icons/whiteBasket.png";
 
-const CatalogList = ({ popularityValue, typeValue }) => {
+const CatalogList = ({ popularityValue, typeValue, priceFrom, priceTo }) => {
     const [startIndex, setStartIndex] = useState(0);
     const [quantityOfItems, setQuantityOfItems] = useState(5);
     const [goods, setGoods] = useState(data);
@@ -60,8 +60,17 @@ const CatalogList = ({ popularityValue, typeValue }) => {
                 break;
         }
 
-        console.log(filtered)
-    }, [typeValue])
+    }, [typeValue]);
+
+    useEffect(() => {
+        const filtered = [...goods];
+
+        filtered.filter((item) => (item.initialPrice >= Number(priceFrom) && item.initialPrice <= Number(priceTo)));
+        console.log(filtered.initialPrice);
+        console.log(Number(priceFrom), Number(priceTo));
+
+        setGoods(filtered);
+    }, [priceFrom, priceTo])
 
     const endIndex = startIndex + quantityOfItems;
     const totalPages = Math.ceil(data.length / quantityOfItems);

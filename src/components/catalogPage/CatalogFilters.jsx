@@ -3,8 +3,9 @@ import { useState, useEffect } from "react";
 import filter from "../../icons/filter.png";
 import chevronDown from "../../icons/chevron-down.png";
 import chevronUp from "../../icons/chevron-up.png";
+import itemInfo from "../../data/data";
 
-const CatalogFilters = ({ onPopularity, onType }) => {
+const CatalogFilters = ({ onPopularity, onType, onPriceFrom, onPriceTo }) => {
     const [showType, setShowType] = useState(false);
     const [showPopularity, setShowPopularity] = useState(false);
     const [typeValue, setTypeValue] = useState(null);
@@ -16,8 +17,10 @@ const CatalogFilters = ({ onPopularity, onType }) => {
     const [popularityValue, setPopularityValue] = useState(null);
     const [isCheckedAsc, setIsCheckedAsc] = useState(false);
     const [isCheckedDesc, setIsCheckedDesc] = useState(false);
-
-    console.log(typeValue)
+    const [priceFrom, setPriceFrom] = useState(0);
+    const [priceTo, setPriceTo] = useState(() => {
+        return Math.max(...itemInfo.map((item) => item.initialPrice));
+    });
 
     useEffect(() => {
         onPopularity(popularityValue);
@@ -25,7 +28,7 @@ const CatalogFilters = ({ onPopularity, onType }) => {
 
     useEffect(() => {
         onType(typeValue);
-    }, [typeValue])
+    }, [typeValue]);
 
     useEffect(() => {
         if (isCheckedAsc === true) {
@@ -36,6 +39,14 @@ const CatalogFilters = ({ onPopularity, onType }) => {
             setPopularityValue(null);
         }
     }, [isCheckedAsc, isCheckedDesc]);
+
+    useEffect(() => {
+        onPriceFrom(priceFrom);
+    }, [priceFrom]);
+
+    useEffect(() => {
+        onPriceTo(priceTo);
+    }, [priceTo]);
 
     useEffect(() => {
         if (isCheckedFirst === true) {
@@ -51,7 +62,13 @@ const CatalogFilters = ({ onPopularity, onType }) => {
         } else {
             setTypeValue(null);
         }
-    }, [isCheckedFifth, isCheckedFirst, isCheckedFourth, isCheckedSecond, isCheckedThird])
+    }, [
+        isCheckedFifth,
+        isCheckedFirst,
+        isCheckedFourth,
+        isCheckedSecond,
+        isCheckedThird,
+    ]);
 
     const handleCheckedAsc = () => {
         if (isCheckedDesc) {
@@ -81,7 +98,7 @@ const CatalogFilters = ({ onPopularity, onType }) => {
             setIsCheckedFifth(false);
         }
         setIsCheckedFirst(!isCheckedFirst);
-    }
+    };
 
     const handleCheckedSecond = () => {
         if (isCheckedFirst) {
@@ -97,7 +114,7 @@ const CatalogFilters = ({ onPopularity, onType }) => {
             setIsCheckedFifth(false);
         }
         setIsCheckedSecond(!isCheckedSecond);
-    }
+    };
 
     const handleCheckedThird = () => {
         if (isCheckedFirst) {
@@ -113,7 +130,7 @@ const CatalogFilters = ({ onPopularity, onType }) => {
             setIsCheckedFifth(false);
         }
         setIsCheckedThird(!isCheckedThird);
-    }
+    };
 
     const handleCheckedFourth = () => {
         if (isCheckedFirst) {
@@ -129,7 +146,7 @@ const CatalogFilters = ({ onPopularity, onType }) => {
             setIsCheckedFifth(false);
         }
         setIsCheckedFourth(!isCheckedFourth);
-    }
+    };
 
     const handleCheckedFifth = () => {
         if (isCheckedFirst) {
@@ -145,7 +162,15 @@ const CatalogFilters = ({ onPopularity, onType }) => {
             setIsCheckedFourth(false);
         }
         setIsCheckedFifth(!isCheckedFifth);
-    }
+    };
+
+    const changePriceFrom = (e) => {
+        setPriceFrom(e.target.value);
+    };
+
+    const changePriceTo = (e) => {
+        setPriceTo(e.target.value);
+    };
 
     return (
         <div className="catalogFilters">
@@ -164,10 +189,18 @@ const CatalogFilters = ({ onPopularity, onType }) => {
                     </div>
                     <div className="params_price__input">
                         <div className="params_price__from">
-                            <input type="text" placeholder="От" />
+                            <input
+                                type="text"
+                                value={priceFrom}
+                                onChange={changePriceFrom}
+                            />
                         </div>
                         <div className="params_price__to">
-                            <input type="text" placeholder="До" />
+                            <input
+                                type="text"
+                                value={priceTo}
+                                onChange={changePriceTo}
+                            />
                         </div>
                     </div>
                 </div>

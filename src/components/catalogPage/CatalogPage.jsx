@@ -9,6 +9,8 @@ const CatalogPage = () => {
 
     const [popularityValue, setPopularityValue] = useState(null);
     const [typeValue, setTypeValue] = useState(null);
+    const [priceFrom, setPriceFrom] = useState();
+    const [priceTo, setPriceTo] = useState();
 
     const popularityFilter = (checkedItem) => {
         setPopularityValue(checkedItem);
@@ -16,7 +18,14 @@ const CatalogPage = () => {
 
     const typeFilter = (checkedItem) => {
         setTypeValue(checkedItem);
-        console.log(checkedItem)
+    }
+
+    const priceFromFilter = (from) => {
+        setPriceFrom(from);
+    }
+
+    const priceToFilter = (to) => {
+        setPriceTo(to);
     }
 
     return (
@@ -36,8 +45,8 @@ const CatalogPage = () => {
                 <h1>Каталог</h1>
             </div>
             <div className="catalogPage_panel">
-                <CatalogFilters onPopularity={popularityFilter} onType={typeFilter} />
-                <CatalogList popularityValue={popularityValue} typeValue={typeValue} />
+                <CatalogFilters onPopularity={popularityFilter} onType={typeFilter} onPriceFrom={priceFromFilter} onPriceTo={priceToFilter} />
+                <CatalogList popularityValue={popularityValue} typeValue={typeValue} priceFrom={priceFrom} priceTo={priceTo} />
             </div>
         </div>
     );
