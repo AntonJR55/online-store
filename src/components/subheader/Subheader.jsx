@@ -16,12 +16,12 @@ const Subheader = () => {
                 <div className="subheader__title">
                     <p>Республиканский производитель металлоизделий</p>
                 </div>
-                <div className="subheader__catalog">
+                <Link className="subheader__catalog" to={`/catalog`}>
                     <div className="subheader__catalog_square">
                         <img src={square} alt="square" />
                     </div>
                     <button>Каталог</button>
-                </div>
+                </Link>
                 <div className="subheader__input">
                     <div className="subheader__input_logo">
                         <img src={search} alt="search" />

@@ -116,8 +116,10 @@
             }
 
             &-detailed {
+                display: block;
                 margin-top: 15px;
                 margin-left: 20px;
+                text-decoration: none;
 
                 button {
                     width: 245px;
@@ -252,7 +254,6 @@
                 height: 100%;
                 border: none;
                 background-color: #E30614;
-
                 span {
                     color: #fff;
                 }

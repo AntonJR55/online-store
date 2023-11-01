@@ -1,0 +1,143 @@
+.itemPage {
+    margin-left: 300px;
+    .navigation {
+        margin-top: 40px;
+        display: flex;
+        &__main {
+            a {
+                text-decoration: none;
+                color: #b3b3b3;
+            }
+        }
+        &__arrow {
+            margin-left: 20px;
+            img {
+                width: 10px;
+                height: 10px;
+            }
+        }
+        &__item {
+            margin-left: 20px;
+        }
+    }
+    &__item {
+        .item__header {
+            display: flex;
+            justify-content: space-around;
+            .item__panels {
+                .item__count {
+                    display: flex;
+                    width: 108px;
+                    height: 35px;
+                    margin-top: 20px;
+                    margin-left: 135px;
+                    border: 1px solid #e6e6e6;
+                    &_increase {
+                        width: 28px;
+                        height: 35px;
+                        img {
+                            display: block;
+                            margin: 15px auto;
+                        }
+                    }
+                    &_total {
+                        width: 52px;
+                        height: 35px;
+                        border-right: 1px solid #e6e6e6;
+                        border-left: 1px solid #e6e6e6;
+                        span {
+                            width: 9px;
+                            height: 20px;
+                            display: block;
+                            margin: 7px auto;
+                        }
+                    }
+                    &_decrease {
+                        width: 28px;
+                        height: 35px;
+                        img {
+                            display: block;
+                            margin: 14px auto;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .item__parameters {
+        margin-left: 32px;
+        .parameters_type {
+            .type_line {
+                width: 250px;
+                height: 1px;
+                margin-top: 15px;
+                background-color: #e6e6e6;
+            }
+        }
+        .parameters_verticalLoad {
+            .verticalLoad_line {
+                width: 115px;
+                height: 1px;
+                margin-top: 15px;
+                background-color: #e6e6e6;
+            }
+        }
+        .parameters_diameter {
+            .diameter_line {
+                width: 180px;
+                height: 1px;
+                margin-top: 15px;
+                background-color: #e6e6e6;
+            }
+        }
+        .parameters_supportWidth {
+            .supportWidth_line {
+                width: 160px;
+                height: 1px;
+                margin-top: 15px;
+                background-color: #e6e6e6;
+            }
+        }
+        .parameters_blocksMass {
+            .blocksMass_line {
+                width: 175px;
+                height: 1px;
+                margin-top: 15px;
+                background-color: #e6e6e6;
+            }
+        }
+        .parameters_partNumber {
+            .partNumber_line {
+                width: 225px;
+                height: 1px;
+                margin-top: 15px;
+                background-color: #e6e6e6;
+            }
+        }
+        .parameters_measurementUnit {
+            .measurementUnit_line {
+                width: 155px;
+                height: 1px;
+                margin-top: 15px;
+                background-color: #e6e6e6;
+            }
+        }
+    }
+    .parameter {
+        display: flex;
+        margin-top: 10px;
+        .parameters_text {
+            span {
+                font-size: 12px;
+                font-weight: 400;
+                color: #b3b3b3;
+            }
+        }
+        .parameters_value {
+            span {
+                font-size: 12px;
+                font-weight: 400;
+            }
+        }
+    }
+}

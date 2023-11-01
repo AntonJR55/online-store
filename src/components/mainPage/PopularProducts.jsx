@@ -9,9 +9,9 @@ const PopularProducts = ({
     showNotification,
     cardInNotification,
     onAddToCard,
+    onShowDetailedCard,
     onCloseNotification,
 }) => {
-
     return (
         <div className="container">
             <div className="popularProducts">
@@ -27,7 +27,10 @@ const PopularProducts = ({
                 </div>
                 <div className="popularProducts__cards">
                     {data.map((item) => (
-                        <div key={item.id} className="popularProducts__cards_item">
+                        <div
+                            key={item.id}
+                            className="popularProducts__cards_item"
+                        >
                             <div className="popularProducts__cards_item-img">
                                 <img src={item.image} alt="Item" />
                             </div>
@@ -46,11 +49,14 @@ const PopularProducts = ({
                                     <span>В корзину</span>
                                 </button>
                             </div>
-                            <div className="popularProducts__cards_item-detailed">
-                                <button>
+                            <Link
+                                className="popularProducts__cards_item-detailed"
+                                to={`/item/${item.id}`}
+                            >
+                                <button onClick={() => onShowDetailedCard(item)}>
                                     <span>Подробнее</span>
                                 </button>
-                            </div>
+                            </Link>
                         </div>
                     ))}
                 </div>

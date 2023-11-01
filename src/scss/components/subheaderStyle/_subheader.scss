@@ -20,10 +20,13 @@
         }
     }
     &__catalog {
+        display: block;
         position: relative;
         width: 145px;
         height: 42px;
         margin-top: 31px;
+        text-decoration: none;
+        cursor: pointer;
         &_square {
             position: absolute;
             width: 17px;

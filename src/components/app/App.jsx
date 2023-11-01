@@ -7,6 +7,7 @@ import Subheader from "../subheader/Subheader";
 import Footer from "../footer/Footer";
 import BasketPage from "../basketPage/BasketPage";
 import CatalogPage from "../catalogPage/CatalogPage";
+import ItemPage from "../itemPage/ItemPage";
 
 import "../../scss/index.scss";
 import MainPage from "../mainPage/MainPage";
@@ -16,6 +17,11 @@ function App() {
     const [cardItem, setCardItem] = React.useState([]);
     const [addedItems, setAddedItems] = React.useState([]);
     const [showNotification, setShowNotification] = React.useState(false);
+    const [detailedCardItem, setDetailedCardItem] = React.useState([]);
+    
+    const showDetailedCardItem = (itemInfo) => {
+        setDetailedCardItem([itemInfo]);
+    }
 
     const closeNotification = () => {
         setShowNotification(false);
@@ -27,16 +33,16 @@ function App() {
             setCardItem([...cardItem, itemInfo]);
             setAddedItems([...addedItems, itemInfo.id]);
             setShowNotification(true);
+            console.log("handle");
         }
+        console.log("hanldeAdd");
     };
 
     const deleteItem = (itemId) => {
         setCardItem((prevData) =>
             prevData.filter((item) => item.id !== itemId)
         );
-        setAddedItems((prevData) =>
-            prevData.filter((item) => item !== itemId)
-        );
+        setAddedItems((prevData) => prevData.filter((item) => item !== itemId));
     };
 
     const deleteItemsAll = () => {
@@ -53,9 +59,10 @@ function App() {
                         element={
                             <>
                                 <MainPage
-                                    showNotification={showNotification} 
+                                    showNotification={showNotification}
                                     cardInNotification={cardInNotification}
                                     onAddToCard={handleAddToCard}
+                                    onShowDetailedCard={showDetailedCardItem}
                                     onCloseNotification={closeNotification}
                                 />
                             </>
@@ -82,7 +89,24 @@ function App() {
                             <>
                                 <Header />
                                 <Subheader />
-                                <CatalogPage />
+                                <CatalogPage
+                                    onAddToCard={handleAddToCard}
+                                    showNotification={showNotification}
+                                    cardInNotification={cardInNotification}
+                                    onShowDetailedCard={showDetailedCardItem}
+                                    onCloseNotification={closeNotification}
+                                />
+                            </>
+                        }
+                    />
+                    <Route
+                        path="/item/:id"
+                        element={
+                            <>
+                                <Header />
+                                <Subheader />
+                                <ItemPage detailedCardItem={detailedCardItem} />
+                                <Footer />
                             </>
                         }
                     />

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 import PageSelection from "./PageSelection";
 
@@ -8,7 +9,17 @@ import plus from "../../icons/plus.png";
 import minus from "../../icons/minus.png";
 import whiteBasket from "../../icons/whiteBasket.png";
 
-const CatalogList = ({ popularityValue, typeValue, priceFrom, priceTo }) => {
+const CatalogList = ({
+    popularityValue,
+    typeValue,
+    priceFrom,
+    priceTo,
+    onAddToCard,
+    showNotification,
+    cardInNotification,
+    onCloseNotification,
+    onShowDetailedCard
+}) => {
     const [startIndex, setStartIndex] = useState(0);
     const [quantityOfItems, setQuantityOfItems] = useState(5);
     const [goods, setGoods] = useState(data);
@@ -33,7 +44,7 @@ const CatalogList = ({ popularityValue, typeValue, priceFrom, priceTo }) => {
 
     useEffect(() => {
         const filtered = [...goods];
-        
+
         switch (typeValue) {
             case 1:
                 filtered.filter((item) => (item.type = 1));
@@ -59,18 +70,18 @@ const CatalogList = ({ popularityValue, typeValue, priceFrom, priceTo }) => {
                 setGoods(data);
                 break;
         }
-
     }, [typeValue]);
 
     useEffect(() => {
         const filtered = [...goods];
 
-        filtered.filter((item) => (item.initialPrice >= Number(priceFrom) && item.initialPrice <= Number(priceTo)));
-        console.log(filtered.initialPrice);
-        console.log(Number(priceFrom), Number(priceTo));
-
+        filtered.filter(
+            (item) =>
+                item.initialPrice >= Number(priceFrom) &&
+                item.initialPrice <= Number(priceTo)
+        );
         setGoods(filtered);
-    }, [priceFrom, priceTo])
+    }, [priceFrom, priceTo]);
 
     const endIndex = startIndex + quantityOfItems;
     const totalPages = Math.ceil(data.length / quantityOfItems);
@@ -199,7 +210,7 @@ const CatalogList = ({ popularityValue, typeValue, priceFrom, priceTo }) => {
                             </div>
                         </div>
                         <div className="addToBasket_basket">
-                            <button>
+                            <button onClick={() => onAddToCard(item)}>
                                 <div className="addToBasket_basket__img">
                                     <img src={whiteBasket} alt="Basket" />
                                 </div>
@@ -208,14 +219,58 @@ const CatalogList = ({ popularityValue, typeValue, priceFrom, priceTo }) => {
                                 </div>
                             </button>
                         </div>
-                        <div className="addToBasket_detailed">
-                            <button>
+                        <Link className="addToBasket_detailed" to={`/item/${item.id}`}>
+                            <button onClick={() => onShowDetailedCard(item)}>
                                 <span>Подробнее</span>
                             </button>
-                        </div>
+                        </Link>
                     </div>
                 </div>
             ))}
+            {showNotification ? (
+                <div className="notification">
+                    <div className="notification__content">
+                        <div className="notification__header">
+                            <h3>Товар добавлен в корзину</h3>
+                        </div>
+                        <div className="notification__line">
+                            <div></div>
+                        </div>
+                        <div className="notification__body">
+                            <div className="notification__body_img">
+                                <img
+                                    src={cardInNotification.image}
+                                    alt="Item"
+                                />
+                            </div>
+                            <div className="notification__body_standard">
+                                <span>{cardInNotification.standard}</span>
+                            </div>
+                            <div className="notification__body_title">
+                                <span>{cardInNotification.title}</span>
+                            </div>
+                            <div className="notification__body_cost">
+                                <span>{cardInNotification.initialPrice}</span>
+                            </div>
+                            <div className="notification__body_continue">
+                                <button onClick={onCloseNotification}>
+                                    <span>Продолжить покупки</span>
+                                </button>
+                            </div>
+                            <Link
+                                className="notification__body_basket"
+                                to={`/basket`}
+                            >
+                                <button onClick={onCloseNotification}>
+                                    <span>Перейти в корзину</span>
+                                </button>
+                            </Link>
+                        </div>
+                    </div>
+                </div>
+            ) : (
+                ""
+            )}
             <PageSelection
                 totalPages={totalPages}
                 onQuantityHandler={quantityOfItemsHandler}

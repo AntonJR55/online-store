@@ -8,7 +8,7 @@ import PopularProducts from "./PopularProducts";
 import Footer from "../footer/Footer";
 
 
-const MainPage = ({ showNotification, cardInNotification, onAddToCard, onCloseNotification }) => {
+const MainPage = ({ showNotification, cardInNotification, onAddToCard, onCloseNotification, onShowDetailedCard }) => {
     return (
         <Fragment>
             <Header />
@@ -19,6 +19,7 @@ const MainPage = ({ showNotification, cardInNotification, onAddToCard, onCloseNo
                 showNotification={showNotification}
                 cardInNotification={cardInNotification}
                 onAddToCard={onAddToCard}
+                onShowDetailedCard={onShowDetailedCard}
                 onCloseNotification={onCloseNotification}
             />
             <Footer />
