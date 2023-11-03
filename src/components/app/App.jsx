@@ -18,9 +18,11 @@ function App() {
     const [addedItems, setAddedItems] = React.useState([]);
     const [showNotification, setShowNotification] = React.useState(false);
     const [detailedCardItem, setDetailedCardItem] = React.useState([]);
+    console.log(detailedCardItem);
     
     const showDetailedCardItem = (itemInfo) => {
         setDetailedCardItem([itemInfo]);
+        console.log('yes');
     }
 
     const closeNotification = () => {
@@ -33,9 +35,7 @@ function App() {
             setCardItem([...cardItem, itemInfo]);
             setAddedItems([...addedItems, itemInfo.id]);
             setShowNotification(true);
-            console.log("handle");
         }
-        console.log("hanldeAdd");
     };
 
     const deleteItem = (itemId) => {
@@ -58,6 +58,8 @@ function App() {
                         path="/"
                         element={
                             <>
+                                <Header />
+                                <Subheader onShowDetailedCard={showDetailedCardItem} />
                                 <MainPage
                                     showNotification={showNotification}
                                     cardInNotification={cardInNotification}
@@ -65,6 +67,7 @@ function App() {
                                     onShowDetailedCard={showDetailedCardItem}
                                     onCloseNotification={closeNotification}
                                 />
+                                <Footer />
                             </>
                         }
                     />
@@ -73,7 +76,7 @@ function App() {
                         element={
                             <>
                                 <Header />
-                                <Subheader />
+                                <Subheader onShowDetailedCard={showDetailedCardItem} />
                                 <BasketPage
                                     cardItem={cardItem}
                                     onDeleteItemsAll={deleteItemsAll}
@@ -88,7 +91,7 @@ function App() {
                         element={
                             <>
                                 <Header />
-                                <Subheader />
+                                <Subheader onShowDetailedCard={showDetailedCardItem} />
                                 <CatalogPage
                                     onAddToCard={handleAddToCard}
                                     showNotification={showNotification}
@@ -104,7 +107,7 @@ function App() {
                         element={
                             <>
                                 <Header />
-                                <Subheader />
+                                <Subheader onShowDetailedCard={showDetailedCardItem} />
                                 <ItemPage detailedCardItem={detailedCardItem} />
                                 <Footer />
                             </>

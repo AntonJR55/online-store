@@ -1,12 +1,13 @@
 import { Link } from 'react-router-dom';
 
+import SearchPanel from '../UI/SearchPanel';
+
 import logo from '../../icons/logo.png';
-import search from '../../icons/search.png';
 import square from '../../icons/catalog.png';
 import star from '../../icons/star.png';
 import basket from '../../icons/basket.png';
 
-const Subheader = () => {
+const Subheader = ({ onShowDetailedCard }) => {
     return (
         <div className="container">
             <div className="subheader">
@@ -22,12 +23,7 @@ const Subheader = () => {
                     </div>
                     <button>Каталог</button>
                 </Link>
-                <div className="subheader__input">
-                    <div className="subheader__input_logo">
-                        <img src={search} alt="search" />
-                    </div>
-                    <input type="text" className="subheader__input_search" placeholder="Поиск по названию..."/>                   
-                </div>
+                <SearchPanel onShowDetailedCard={onShowDetailedCard} />
                 <div className="subheader__button">
                     <button>Заказать звонок</button>
                 </div>

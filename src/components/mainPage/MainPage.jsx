@@ -1,18 +1,12 @@
 import { Fragment  } from "react";
 
-import Header from "../header/Header";
-import Subheader from "../subheader/Subheader";
 import Description from "./Description";
 import AreasOfActivity from "./AreasOfActivity";
 import PopularProducts from "./PopularProducts";
-import Footer from "../footer/Footer";
-
 
 const MainPage = ({ showNotification, cardInNotification, onAddToCard, onCloseNotification, onShowDetailedCard }) => {
     return (
         <Fragment>
-            <Header />
-            <Subheader />
             <Description />
             <AreasOfActivity />
             <PopularProducts 
@@ -22,7 +16,6 @@ const MainPage = ({ showNotification, cardInNotification, onAddToCard, onCloseNo
                 onShowDetailedCard={onShowDetailedCard}
                 onCloseNotification={onCloseNotification}
             />
-            <Footer />
         </Fragment>
     )
 }
