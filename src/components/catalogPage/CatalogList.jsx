@@ -18,7 +18,7 @@ const CatalogList = ({
     showNotification,
     cardInNotification,
     onCloseNotification,
-    onShowDetailedCard
+    onShowDetailedCard,
 }) => {
     const [startIndex, setStartIndex] = useState(0);
     const [quantityOfItems, setQuantityOfItems] = useState(5);
@@ -26,67 +26,49 @@ const CatalogList = ({
     console.log(goods);
 
     useEffect(() => {
-        const sorted = [...goods];
-        console.log('e')
-
-        switch (popularityValue) {
-            case "asc":
-                sorted.sort((a, b) => a.popularity - b.popularity);
-                setGoods(sorted);
-                break;
-            case "desc":
-                sorted.sort((a, b) => b.popularity - a.popularity);
-                setGoods(sorted);
-                break;
-            default:
-                setGoods(data);
-                break;
-        }
-    }, [popularityValue]);
-
-    useEffect(() => {
-        switch (typeValue) {
-            case 1:
-                const firstType = data.filter((item) => (item.type === 1));
-                setGoods(firstType);
-                break;
-            case 2:
-                const secondType = data.filter((item) => (item.type === 2));
-                setGoods(secondType);
-                break;
-            case 3:
-                const thirdType = data.filter((item) => (item.type === 3));
-                setGoods(thirdType);
-                break;
-            case 4:
-                const fourthType = data.filter((item) => (item.type === 4));
-                console.log('false')
-                setGoods(fourthType);
-                break;
-            case 5:
-                const fifthType = data.filter((item) => (item.type === 5));
-                setGoods(fifthType);
-                break;
-            default:
-                setGoods(data);
-                break;
-        }
-    }, [typeValue]);
-
-    useEffect(() => {
-        const filteredData = data.filter((item) => {
+        const priceFilteredData = data.filter((item) => {
             const itemPrice = item.initialPrice;
             return (
                 itemPrice >= parseFloat(priceFrom) &&
                 itemPrice <= parseFloat(priceTo)
-            )
-        })
+            );
+        });
 
-        setGoods(filteredData);
-    }, [priceFrom, priceTo]);
+        const typeAndPriceFilteredData = priceFilteredData.filter((item) => {
+            switch (typeValue) {
+                case 1:
+                    return item.type === 1;
+                case 2:
+                    return item.type === 2;
+                case 3:
+                    return item.type === 3;
+                case 4:
+                    return item.type === 4;
+                case 5:
+                    return item.type === 5;
+                default:
+                    return true;
+            }
+        });
+
+        const popularitySortedData = typeAndPriceFilteredData.slice(0); 
+
+        switch (popularityValue) {
+            case "asc":
+                popularitySortedData.sort((a, b) => a.popularity - b.popularity);
+                break;
+            case "desc":
+                popularitySortedData.sort((a, b) => b.popularity - a.popularity);
+                break;
+            default:
+                break;
+        }
+
+        setGoods(popularitySortedData);
+    }, [popularityValue, priceFrom, priceTo, typeValue]);
 
     const endIndex = startIndex + quantityOfItems;
-    const totalPages = Math.ceil(data.length / quantityOfItems);
+    const totalPages = Math.ceil(goods.length / quantityOfItems);
 
     const quantityOfItemsHandler = (activeItem) => {
         switch (activeItem) {
@@ -224,7 +206,10 @@ const CatalogList = ({
                                 </div>
                             </button>
                         </div>
-                        <Link className="addToBasket_detailed" to={`/item/${item.id}`}>
+                        <Link
+                            className="addToBasket_detailed"
+                            to={`/item/${item.id}`}
+                        >
                             <button onClick={() => onShowDetailedCard(item)}>
                                 <span>Подробнее</span>
                             </button>

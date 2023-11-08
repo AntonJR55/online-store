@@ -1,5 +1,4 @@
-import { useState, useEffect } from "react";
-
+import React, { useState, useEffect } from "react";
 import filter from "../../icons/filter.png";
 import chevronDown from "../../icons/chevron-down.png";
 import chevronUp from "../../icons/chevron-up.png";
@@ -9,18 +8,23 @@ const CatalogFilters = ({ onPopularity, onType, onPriceFrom, onPriceTo }) => {
     const [showType, setShowType] = useState(false);
     const [showPopularity, setShowPopularity] = useState(false);
     const [typeValue, setTypeValue] = useState(null);
-    const [isCheckedFirst, setIsCheckedFirst] = useState(false);
-    const [isCheckedSecond, setIsCheckedSecond] = useState(false);
-    const [isCheckedThird, setIsCheckedThird] = useState(false);
-    const [isCheckedFourth, setIsCheckedFourth] = useState(false);
-    const [isCheckedFifth, setIsCheckedFifth] = useState(false);
     const [popularityValue, setPopularityValue] = useState(null);
-    const [isCheckedAsc, setIsCheckedAsc] = useState(false);
-    const [isCheckedDesc, setIsCheckedDesc] = useState(false);
     const [priceFrom, setPriceFrom] = useState(0);
-    const [priceTo, setPriceTo] = useState(() => {
-        return Math.max(...itemInfo.map((item) => item.initialPrice));
-    });
+    const [priceTo, setPriceTo] = useState(
+        Math.max(...itemInfo.map((item) => item.initialPrice))
+    );
+
+    const handleCheck = (stateSetter, stateValue, newValue) => {
+        if (stateValue === newValue) {
+            stateSetter(null);
+        } else {
+            stateSetter(newValue);
+        }
+    };
+
+    const changePrice = (setter, e) => {
+        setter(e.target.value);
+    };
 
     useEffect(() => {
         onPopularity(popularityValue);
@@ -31,146 +35,12 @@ const CatalogFilters = ({ onPopularity, onType, onPriceFrom, onPriceTo }) => {
     }, [typeValue]);
 
     useEffect(() => {
-        if (isCheckedAsc === true) {
-            setPopularityValue("asc");
-        } else if (isCheckedDesc === true) {
-            setPopularityValue("desc");
-        } else {
-            setPopularityValue(null);
-        }
-    }, [isCheckedAsc, isCheckedDesc]);
-
-    useEffect(() => {
         onPriceFrom(priceFrom);
     }, [priceFrom]);
 
     useEffect(() => {
         onPriceTo(priceTo);
     }, [priceTo]);
-
-    useEffect(() => {
-        if (isCheckedFirst === true) {
-            setTypeValue(1);
-        } else if (isCheckedSecond === true) {
-            setTypeValue(2);
-        } else if (isCheckedThird === true) {
-            setTypeValue(3);
-        } else if (isCheckedFourth === true) {
-            setTypeValue(4);
-        } else if (isCheckedFifth === true) {
-            setTypeValue(5);
-        } else {
-            setTypeValue(null);
-        }
-    }, [
-        isCheckedFifth,
-        isCheckedFirst,
-        isCheckedFourth,
-        isCheckedSecond,
-        isCheckedThird,
-    ]);
-
-    const handleCheckedAsc = () => {
-        if (isCheckedDesc) {
-            setIsCheckedDesc(false);
-        }
-        setIsCheckedAsc(!isCheckedAsc);
-    };
-
-    const handleCheckedDesc = () => {
-        if (isCheckedAsc) {
-            setIsCheckedAsc(false);
-        }
-        setIsCheckedDesc(!isCheckedDesc);
-    };
-
-    const handleCheckedFirst = () => {
-        if (isCheckedSecond) {
-            setIsCheckedSecond(false);
-        }
-        if (isCheckedThird) {
-            setIsCheckedThird(false);
-        }
-        if (isCheckedFourth) {
-            setIsCheckedFourth(false);
-        }
-        if (isCheckedFifth) {
-            setIsCheckedFifth(false);
-        }
-        setIsCheckedFirst(!isCheckedFirst);
-    };
-
-    const handleCheckedSecond = () => {
-        if (isCheckedFirst) {
-            setIsCheckedFirst(false);
-        }
-        if (isCheckedThird) {
-            setIsCheckedThird(false);
-        }
-        if (isCheckedFourth) {
-            setIsCheckedFourth(false);
-        }
-        if (isCheckedFifth) {
-            setIsCheckedFifth(false);
-        }
-        setIsCheckedSecond(!isCheckedSecond);
-    };
-
-    const handleCheckedThird = () => {
-        if (isCheckedFirst) {
-            setIsCheckedFirst(false);
-        }
-        if (isCheckedSecond) {
-            setIsCheckedSecond(false);
-        }
-        if (isCheckedFourth) {
-            setIsCheckedFourth(false);
-        }
-        if (isCheckedFifth) {
-            setIsCheckedFifth(false);
-        }
-        setIsCheckedThird(!isCheckedThird);
-    };
-
-    const handleCheckedFourth = () => {
-        if (isCheckedFirst) {
-            setIsCheckedFirst(false);
-        }
-        if (isCheckedSecond) {
-            setIsCheckedSecond(false);
-        }
-        if (isCheckedThird) {
-            setIsCheckedThird(false);
-        }
-        if (isCheckedFifth) {
-            setIsCheckedFifth(false);
-        }
-        setIsCheckedFourth(!isCheckedFourth);
-    };
-
-    const handleCheckedFifth = () => {
-        if (isCheckedFirst) {
-            setIsCheckedFirst(false);
-        }
-        if (isCheckedSecond) {
-            setIsCheckedSecond(false);
-        }
-        if (isCheckedThird) {
-            setIsCheckedThird(false);
-        }
-        if (isCheckedFourth) {
-            setIsCheckedFourth(false);
-        }
-        setIsCheckedFifth(!isCheckedFifth);
-    };
-
-    const changePriceFrom = (e) => {
-        setPriceFrom(e.target.value);
-    };
-
-    const changePriceTo = (e) => {
-        setPriceTo(e.target.value);
-    }
 
     return (
         <div className="catalogFilters">
@@ -192,14 +62,14 @@ const CatalogFilters = ({ onPopularity, onType, onPriceFrom, onPriceTo }) => {
                             <input
                                 type="text"
                                 value={priceFrom}
-                                onChange={changePriceFrom}
+                                onChange={(e) => changePrice(setPriceFrom, e)}
                             />
                         </div>
                         <div className="params_price__to">
                             <input
                                 type="text"
                                 value={priceTo}
-                                onChange={changePriceTo}
+                                onChange={(e) => changePrice(setPriceTo, e)}
                             />
                         </div>
                     </div>
@@ -209,89 +79,43 @@ const CatalogFilters = ({ onPopularity, onType, onPriceFrom, onPriceTo }) => {
                         <div className="params_type__title">
                             <span>Тип продукта</span>
                         </div>
-                        {showType ? (
-                            <div
-                                className="params_type__icon"
-                                onChange={() => setShowType(false)}
-                            >
-                                <img src={chevronUp} alt="Chevron" />
-                            </div>
-                        ) : (
-                            <div
-                                className="params_type__icon"
-                                onClick={() => setShowType(true)}
-                            >
-                                <img src={chevronDown} alt="Chevron" />
-                            </div>
-                        )}
+                        <div
+                            className="params_type__icon"
+                            onClick={() => setShowType(!showType)}
+                        >
+                            <img
+                                src={showType ? chevronUp : chevronDown}
+                                alt="Chevron"
+                            />
+                        </div>
                     </div>
                     {showType && (
                         <div className="params_type__body">
-                            <div className="params_type__value">
-                                <div className="params_type__checkbox">
-                                    <input
-                                        type="checkbox"
-                                        id="first-checkbox"
-                                        checked={isCheckedFirst}
-                                        onChange={handleCheckedFirst}
-                                    />
+                            {[1, 2, 3, 4, 5].map((value) => (
+                                <div className="params_type__value" key={value}>
+                                    <div className="params_type__checkbox">
+                                        <input
+                                            type="checkbox"
+                                            id={`type-checkbox-${value}`}
+                                            checked={typeValue === value}
+                                            onChange={() =>
+                                                handleCheck(
+                                                    setTypeValue,
+                                                    typeValue,
+                                                    value
+                                                )
+                                            }
+                                        />
+                                    </div>
+                                    <div className="params_type__text">
+                                        <label
+                                            htmlFor={`type-checkbox-${value}`}
+                                        >
+                                            {value}
+                                        </label>
+                                    </div>
                                 </div>
-                                <div className="params_type__text">
-                                    <label htmlFor="first-checkbox">1</label>
-                                </div>
-                            </div>
-                            <div className="params_type__value">
-                                <div className="params_type__checkbox">
-                                    <input
-                                        type="checkbox"
-                                        id="second-checkbox"
-                                        checked={isCheckedSecond}
-                                        onChange={handleCheckedSecond}
-                                    />
-                                </div>
-                                <div className="params_type__text">
-                                    <label htmlFor="second-checkbox">2</label>
-                                </div>
-                            </div>
-                            <div className="params_type__value">
-                                <div className="params_type__checkbox">
-                                    <input
-                                        type="checkbox"
-                                        id="third-checkbox"
-                                        checked={isCheckedThird}
-                                        onChange={handleCheckedThird}
-                                    />
-                                </div>
-                                <div className="params_type__text">
-                                    <label htmlFor="third-checkbox">3</label>
-                                </div>
-                            </div>
-                            <div className="params_type__value">
-                                <div className="params_type__checkbox">
-                                    <input
-                                        type="checkbox"
-                                        id="fourth-checkbox"
-                                        checked={isCheckedFourth}
-                                        onChange={handleCheckedFourth}
-                                    />
-                                </div>
-                                <div className="params_type__text">
-                                    <label htmlFor="fourth-checkbox">4</label>
-                                </div>
-                            </div>
-                            <div className="params_type__value">
-                                <div className="params_type__checkbox">
-                                    <input
-                                        type="checkbox"
-                                        id="fifth-checkbox"
-                                        checked={isCheckedFifth}
-                                        onChange={handleCheckedFifth}
-                                    />
-                                </div>
-                                <div className="params_type__text">
-                                    <label htmlFor="fifth-checkbox">5</label>
-                                </div>
-                            </div>
+                            ))}
                         </div>
                     )}
                 </div>
@@ -300,21 +124,15 @@ const CatalogFilters = ({ onPopularity, onType, onPriceFrom, onPriceTo }) => {
                         <div className="params_type__title">
                             <span>По популярности</span>
                         </div>
-                        {showPopularity ? (
-                            <div
-                                className="params_type__icon"
-                                onClick={() => setShowPopularity(false)}
-                            >
-                                <img src={chevronUp} alt="Chevron" />
-                            </div>
-                        ) : (
-                            <div
-                                className="params_type__icon"
-                                onClick={() => setShowPopularity(true)}
-                            >
-                                <img src={chevronDown} alt="Chevron" />
-                            </div>
-                        )}
+                        <div
+                            className="params_type__icon"
+                            onClick={() => setShowPopularity(!showPopularity)}
+                        >
+                            <img
+                                src={showPopularity ? chevronUp : chevronDown}
+                                alt="Chevron"
+                            />
+                        </div>
                     </div>
                     {showPopularity && (
                         <div className="params_type__body">
@@ -323,8 +141,14 @@ const CatalogFilters = ({ onPopularity, onType, onPriceFrom, onPriceTo }) => {
                                     <input
                                         type="checkbox"
                                         id="asc"
-                                        checked={isCheckedAsc}
-                                        onChange={handleCheckedAsc}
+                                        checked={popularityValue === "asc"}
+                                        onChange={() =>
+                                            handleCheck(
+                                                setPopularityValue,
+                                                popularityValue,
+                                                "asc"
+                                            )
+                                        }
                                     />
                                 </div>
                                 <div className="params_type__text">
@@ -336,8 +160,14 @@ const CatalogFilters = ({ onPopularity, onType, onPriceFrom, onPriceTo }) => {
                                     <input
                                         type="checkbox"
                                         id="desc"
-                                        checked={isCheckedDesc}
-                                        onChange={handleCheckedDesc}
+                                        checked={popularityValue === "desc"}
+                                        onChange={() =>
+                                            handleCheck(
+                                                setPopularityValue,
+                                                popularityValue,
+                                                "desc"
+                                            )
+                                        }
                                     />
                                 </div>
                                 <div className="params_type__text">
