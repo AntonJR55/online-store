@@ -170,7 +170,7 @@ const CatalogFilters = ({ onPopularity, onType, onPriceFrom, onPriceTo }) => {
 
     const changePriceTo = (e) => {
         setPriceTo(e.target.value);
-    };
+    }
 
     return (
         <div className="catalogFilters">

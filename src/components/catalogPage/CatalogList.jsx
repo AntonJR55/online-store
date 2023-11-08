@@ -23,9 +23,11 @@ const CatalogList = ({
     const [startIndex, setStartIndex] = useState(0);
     const [quantityOfItems, setQuantityOfItems] = useState(5);
     const [goods, setGoods] = useState(data);
+    console.log(goods);
 
     useEffect(() => {
         const sorted = [...goods];
+        console.log('e')
 
         switch (popularityValue) {
             case "asc":
@@ -43,28 +45,27 @@ const CatalogList = ({
     }, [popularityValue]);
 
     useEffect(() => {
-        const filtered = [...goods];
-
         switch (typeValue) {
             case 1:
-                filtered.filter((item) => (item.type = 1));
-                setGoods(filtered);
+                const firstType = data.filter((item) => (item.type === 1));
+                setGoods(firstType);
                 break;
             case 2:
-                filtered.filter((item) => (item.type = 2));
-                setGoods(filtered);
+                const secondType = data.filter((item) => (item.type === 2));
+                setGoods(secondType);
                 break;
             case 3:
-                filtered.filter((item) => (item.type = 3));
-                setGoods(filtered);
+                const thirdType = data.filter((item) => (item.type === 3));
+                setGoods(thirdType);
                 break;
             case 4:
-                filtered.filter((item) => (item.type = 4));
-                setGoods(filtered);
+                const fourthType = data.filter((item) => (item.type === 4));
+                console.log('false')
+                setGoods(fourthType);
                 break;
             case 5:
-                filtered.filter((item) => (item.type = 5));
-                setGoods(filtered);
+                const fifthType = data.filter((item) => (item.type === 5));
+                setGoods(fifthType);
                 break;
             default:
                 setGoods(data);
@@ -73,14 +74,15 @@ const CatalogList = ({
     }, [typeValue]);
 
     useEffect(() => {
-        const filtered = [...goods];
+        const filteredData = data.filter((item) => {
+            const itemPrice = item.initialPrice;
+            return (
+                itemPrice >= parseFloat(priceFrom) &&
+                itemPrice <= parseFloat(priceTo)
+            )
+        })
 
-        filtered.filter(
-            (item) =>
-                item.initialPrice >= Number(priceFrom) &&
-                item.initialPrice <= Number(priceTo)
-        );
-        setGoods(filtered);
+        setGoods(filteredData);
     }, [priceFrom, priceTo]);
 
     const endIndex = startIndex + quantityOfItems;
@@ -90,12 +92,15 @@ const CatalogList = ({
         switch (activeItem) {
             case "first-item":
                 setQuantityOfItems(5);
+                setStartIndex(0);
                 break;
             case "second-item":
                 setQuantityOfItems(10);
+                setStartIndex(0);
                 break;
             default:
                 setQuantityOfItems(15);
+                setStartIndex(0);
                 break;
         }
     };
