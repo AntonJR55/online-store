@@ -8,6 +8,7 @@ import data from "../../data/data";
 import plus from "../../icons/plus.png";
 import minus from "../../icons/minus.png";
 import whiteBasket from "../../icons/whiteBasket.png";
+import close from "../../icons/close.png";
 
 const CatalogList = ({
     popularityValue,
@@ -16,14 +17,15 @@ const CatalogList = ({
     priceTo,
     onAddToCard,
     showNotification,
+    showToast,
     cardInNotification,
     onCloseNotification,
     onShowDetailedCard,
+    onCloseToast
 }) => {
     const [startIndex, setStartIndex] = useState(0);
     const [quantityOfItems, setQuantityOfItems] = useState(5);
     const [goods, setGoods] = useState(data);
-    console.log(goods);
 
     useEffect(() => {
         const priceFilteredData = data.filter((item) => {
@@ -34,7 +36,7 @@ const CatalogList = ({
             );
         });
 
-        const typeAndPriceFilteredData = priceFilteredData.filter((item) => {
+        const typeFilteredData = priceFilteredData.filter((item) => {
             switch (typeValue) {
                 case 1:
                     return item.type === 1;
@@ -51,7 +53,7 @@ const CatalogList = ({
             }
         });
 
-        const popularitySortedData = typeAndPriceFilteredData.slice(0); 
+        const popularitySortedData = typeFilteredData.slice(0); 
 
         switch (popularityValue) {
             case "asc":
@@ -65,10 +67,7 @@ const CatalogList = ({
         }
 
         setGoods(popularitySortedData);
-    }, [popularityValue, priceFrom, priceTo, typeValue]);
-
-    const endIndex = startIndex + quantityOfItems;
-    const totalPages = Math.ceil(goods.length / quantityOfItems);
+    }, [priceFrom, priceTo, typeValue, popularityValue]);
 
     const quantityOfItemsHandler = (activeItem) => {
         switch (activeItem) {
@@ -80,8 +79,12 @@ const CatalogList = ({
                 setQuantityOfItems(10);
                 setStartIndex(0);
                 break;
-            default:
+            case "third-item":
                 setQuantityOfItems(15);
+                setStartIndex(0);
+                break;
+            default:
+                setQuantityOfItems(goods.length);
                 setStartIndex(0);
                 break;
         }
@@ -98,6 +101,15 @@ const CatalogList = ({
             setStartIndex(startIndex + quantityOfItems);
         }
     };
+
+    const pageNumberHandler = (active) => {
+        setStartIndex((active - 1) * quantityOfItems);
+    }
+
+    const endIndex = startIndex + quantityOfItems;
+    const totalPages = Math.ceil(goods.length / quantityOfItems);
+    console.log(goods.length, quantityOfItems);
+    console.log(startIndex, endIndex);
 
     const displayedItems = goods.slice(startIndex, endIndex);
 
@@ -261,11 +273,22 @@ const CatalogList = ({
             ) : (
                 ""
             )}
+            {showToast && (
+                <div className="toast">
+                    <div className="toast__text">
+                        <span>Данный товар уже находится в корзине!</span>
+                    </div>
+                    <div className="toast__img" onClick={onCloseToast}>
+                        <img src={close} alt="Close" />
+                    </div>
+                </div>
+            )}
             <PageSelection
                 totalPages={totalPages}
                 onQuantityHandler={quantityOfItemsHandler}
-                onNext={nextPage}
+                onPageHandler={pageNumberHandler}
                 onPrev={prevPage}
+                onNext={nextPage}
             />
         </div>
     );
