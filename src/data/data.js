@@ -6,6 +6,9 @@ import fifthItem from "../img/fifthItem.jpg";
 import sixthItem from "../img/sixthItem.jpg";
 import seventhItem from "../img/seventhItem.jpg";
 import eighthItem from "../img/eighthItem.jpg";
+import ninthItem from "../img/ninthItem.jpg";
+import tenthItem from "../img/tenthItem.jpg";
+import eleventhItem from "../img/eleventhItem.jpg";
 
 const itemInfo = [
     {
@@ -81,8 +84,8 @@ const itemInfo = [
         image: fifthItem,
         standard: "ГОСТ 14911-82",
         title: "Опора подвижная ОПБ2",
-        initialPrice: 432.5,
-        totalPrice: 432.5,
+        initialPrice: 420,
+        totalPrice: 420,
         quantity: 1,
         type: 2,
         verticalLoad: 60,
@@ -139,10 +142,61 @@ const itemInfo = [
         verticalLoad: 80,
         diameter: 878,
         supportWidth: 860,
-        blocksMass: 150,
+        blocksMass: 80,
         partNumber: "VS13428",
         measurementUnit: "шт", 
-        popularity: 5
+        popularity: 4
+    },
+    {
+        id: 9,
+        image: ninthItem,
+        standard: "ГОСТ 14911-82",
+        title: "Опора подвижная ОПБ2",
+        initialPrice: 240,
+        totalPrice: 240,
+        quantity: 1,
+        type: 1,
+        verticalLoad: 70,
+        diameter: 600,
+        supportWidth: 580,
+        blocksMass: 50,
+        partNumber: "VS13429",
+        measurementUnit: "шт", 
+        popularity: 1
+    },
+    {
+        id: 10,
+        image: tenthItem,
+        standard: "ГОСТ 14911-82",
+        title: "Опора тавровая хомутовая ТХ",
+        initialPrice: 280.4,
+        totalPrice: 280.4,
+        quantity: 1,
+        type: 4,
+        verticalLoad: 80,
+        diameter: 930,
+        supportWidth: 900,
+        blocksMass: 150,
+        partNumber: "VS13430",
+        measurementUnit: "шт", 
+        popularity: 3
+    },
+    {
+        id: 11,
+        image: eleventhItem,
+        standard: "ГОСТ 14911-82",
+        title: "Опора подвижная ОПБ2",
+        initialPrice: 300.8,
+        totalPrice: 300.8,
+        quantity: 1,
+        type: 5,
+        verticalLoad: 80,
+        diameter: 878,
+        supportWidth: 860,
+        blocksMass: 120,
+        partNumber: "VS13431",
+        measurementUnit: "шт", 
+        popularity: 2
     },
 ]
 

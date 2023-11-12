@@ -7,7 +7,7 @@ import square from '../../icons/catalog.png';
 import star from '../../icons/star.png';
 import basket from '../../icons/basket.png';
 
-const Subheader = ({ onShowDetailedCard }) => {
+const Subheader = ({ cardItemLength, onShowDetailedCard }) => {
     return (
         <div className="container">
             <div className="subheader">
@@ -41,7 +41,7 @@ const Subheader = ({ onShowDetailedCard }) => {
                         <img src={basket} alt="basket" />
                     </div>
                     <div className="subheader__basket_circle">
-                        <p>1</p>
+                        <p>{cardItemLength}</p>
                     </div>
                     <div className="subheader__basket_title">
                         <p>Корзина</p>

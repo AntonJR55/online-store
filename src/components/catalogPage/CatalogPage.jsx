@@ -8,9 +8,11 @@ import CatalogList from "./CatalogList";
 const CatalogPage = ({
     onAddToCard,
     showNotification,
+    showToast,
     cardInNotification,
     onCloseNotification,
-    onShowDetailedCard
+    onShowDetailedCard,
+    onCloseToast
 }) => {
     const [popularityValue, setPopularityValue] = useState(null);
     const [typeValue, setTypeValue] = useState(null);
@@ -63,9 +65,11 @@ const CatalogPage = ({
                     priceTo={priceTo}
                     onAddToCard={onAddToCard}
                     showNotification={showNotification}
+                    showToast={showToast}
                     cardInNotification={cardInNotification}
                     onCloseNotification={onCloseNotification}
                     onShowDetailedCard={onShowDetailedCard}
+                    onCloseToast={onCloseToast}
                 />
             </div>
         </div>

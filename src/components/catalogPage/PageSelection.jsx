@@ -1,20 +1,22 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, Fragment } from "react";
 
 import arrowLeft from "../../icons/arrow-left.png";
 import arrowRight from "../../icons/arrow-right.png";
 
-const PageSelection = ({ totalPages, onPrev, onNext, onQuantityHandler, onPageChange }) => {
+const PageSelection = ({ totalPages, onPrev, onNext, onQuantityHandler }) => {
     const [active, setActive] = useState("first-item");
-    
+
     useEffect(() => {
         onQuantityHandler(active);
-    }, [active])
+        console.log('quantityHandler');
+    }, [active]);
+
 
     const pageNumbers = [];
 
     for (let i = 0; i < totalPages; i++) {
         pageNumbers.push(
-            <div key={i} className="transition_pageNumbers-number"  onClick={() => onPageChange(i + 1)}>
+            <div key={i} className="transition_pageNumbers-number">
                 <span>{i + 1}</span>
             </div>
         );
@@ -34,6 +36,7 @@ const PageSelection = ({ totalPages, onPrev, onNext, onQuantityHandler, onPageCh
                         <span
                             style={{
                                 color: active === "first-item" && "#E30614",
+                                fontWeight: active === "first-item" && "bold",
                             }}
                         >
                             5
@@ -46,6 +49,7 @@ const PageSelection = ({ totalPages, onPrev, onNext, onQuantityHandler, onPageCh
                         <span
                             style={{
                                 color: active === "second-item" && "#E30614",
+                                fontWeight: active === "second-item" && "bold",
                             }}
                         >
                             10
@@ -58,6 +62,7 @@ const PageSelection = ({ totalPages, onPrev, onNext, onQuantityHandler, onPageCh
                         <span
                             style={{
                                 color: active === "third-item" && "#E30614",
+                                fontWeight: active === "third-item" && "bold",
                             }}
                         >
                             15
@@ -66,17 +71,32 @@ const PageSelection = ({ totalPages, onPrev, onNext, onQuantityHandler, onPageCh
                 </div>
             </div>
             <div className="pageSelection_transition">
-                <div className="transition_next" onClick={onPrev}>
-                    <img src={arrowLeft} alt="Arrow-left" />
-                </div>
-                <div className="transition_pageNumbers">
-                    {pageNumbers}
-                </div>
-                <div className="transition_prev" onClick={onNext}>
-                    <img src={arrowRight} alt="Arrow-right" />
-                </div>
-                <div className="transition_showAll">
-                    <span>Показать все товары</span>
+                {pageNumbers.length > 1 ? (
+                    <Fragment>
+                        <div className="transition_next" onClick={onPrev}>
+                            <img src={arrowLeft} alt="Arrow-left" />
+                        </div>
+                        <div className="transition_pageNumbers">
+                            {pageNumbers}
+                        </div>
+                        <div className="transition_prev" onClick={onNext}>
+                            <img src={arrowRight} alt="Arrow-right" />
+                        </div>
+                    </Fragment>
+                ) : (
+                    ""
+                )}
+                <div
+                    className="transition_showAll"
+                    onClick={() => setActive("all-goods")}
+                >
+                    <span
+                        style={{
+                            fontWeight: active === "all-goods" && "bold",
+                        }}
+                    >
+                        Показать все товары
+                    </span>
                 </div>
             </div>
         </div>

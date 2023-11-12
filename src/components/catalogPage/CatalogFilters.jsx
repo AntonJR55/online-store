@@ -26,6 +26,13 @@ const CatalogFilters = ({ onPopularity, onType, onPriceFrom, onPriceTo }) => {
         setter(e.target.value);
     };
 
+    const resetFilters = () => {
+        setTypeValue(null);
+        setPopularityValue(null);
+        setPriceFrom(0);
+        setPriceTo(Math.max(...itemInfo.map((item) => item.initialPrice)));
+    }
+
     useEffect(() => {
         onPopularity(popularityValue);
     }, [popularityValue]);
@@ -179,7 +186,7 @@ const CatalogFilters = ({ onPopularity, onType, onPriceFrom, onPriceTo }) => {
                 </div>
             </div>
             <div className="reset">
-                <button type="button">
+                <button type="button" onClick={resetFilters}>
                     <span>Сбросить фильтры</span>
                 </button>
             </div>

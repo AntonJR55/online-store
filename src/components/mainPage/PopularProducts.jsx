@@ -4,13 +4,16 @@ import { Link } from "react-router-dom";
 import data from "../../data/data";
 
 import whiteBasket from "../../icons/whiteBasket.png";
+import close from "../../icons/close.png";
 
 const PopularProducts = ({
     showNotification,
+    showToast,
     cardInNotification,
     onAddToCard,
     onShowDetailedCard,
     onCloseNotification,
+    onCloseToast,
 }) => {
     return (
         <div className="container">
@@ -53,7 +56,9 @@ const PopularProducts = ({
                                 className="popularProducts__cards_item-detailed"
                                 to={`/item/${item.id}`}
                             >
-                                <button onClick={() => onShowDetailedCard(item)}>
+                                <button
+                                    onClick={() => onShowDetailedCard(item)}
+                                >
                                     <span>Подробнее</span>
                                 </button>
                             </Link>
@@ -104,6 +109,16 @@ const PopularProducts = ({
                 </div>
             ) : (
                 ""
+            )}
+            {showToast && (
+                <div className="toast">
+                    <div className="toast__text">
+                        <span>Данный товар уже находится в корзине!</span>
+                    </div>
+                    <div className="toast__img" onClick={onCloseToast}>
+                        <img src={close} alt="Close" />
+                    </div>
+                </div>
             )}
         </div>
     );
