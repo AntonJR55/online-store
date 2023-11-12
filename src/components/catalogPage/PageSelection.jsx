@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import arrowLeft from "../../icons/arrow-left.png";
 import arrowRight from "../../icons/arrow-right.png";
 
-const PageSelection = ({ totalPages, onPrev, onNext, onQuantityHandler }) => {
+const PageSelection = ({ totalPages, onPrev, onNext, onQuantityHandler, onPageChange }) => {
     const [active, setActive] = useState("first-item");
     
     useEffect(() => {
@@ -14,7 +14,7 @@ const PageSelection = ({ totalPages, onPrev, onNext, onQuantityHandler }) => {
 
     for (let i = 0; i < totalPages; i++) {
         pageNumbers.push(
-            <div key={i} className="transition_pageNumbers-number">
+            <div key={i} className="transition_pageNumbers-number"  onClick={() => onPageChange(i + 1)}>
                 <span>{i + 1}</span>
             </div>
         );

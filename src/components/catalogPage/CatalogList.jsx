@@ -99,6 +99,12 @@ const CatalogList = ({
         }
     };
 
+    const handlePageChange = (pageNumber) => {
+        // Calculate the new start index based on the clicked page number
+        const newStartIndex = (pageNumber - 1) * quantityOfItems;
+        setStartIndex(newStartIndex);
+      };
+
     const displayedItems = goods.slice(startIndex, endIndex);
 
     return (
@@ -266,6 +272,7 @@ const CatalogList = ({
                 onQuantityHandler={quantityOfItemsHandler}
                 onNext={nextPage}
                 onPrev={prevPage}
+                onPageChange={handlePageChange}
             />
         </div>
     );
