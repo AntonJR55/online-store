@@ -67,6 +67,7 @@ const CatalogList = ({
         }
 
         setGoods(popularitySortedData);
+        setStartIndex(0);
     }, [priceFrom, priceTo, typeValue, popularityValue]);
 
     const quantityOfItemsHandler = (activeItem) => {
@@ -84,7 +85,7 @@ const CatalogList = ({
                 setStartIndex(0);
                 break;
             default:
-                setQuantityOfItems(goods.length);
+                setQuantityOfItems(data.length);
                 setStartIndex(0);
                 break;
         }
@@ -108,14 +109,6 @@ const CatalogList = ({
 
     const endIndex = startIndex + quantityOfItems;
     const totalPages = Math.ceil(goods.length / quantityOfItems);
-    console.log(goods.length, quantityOfItems);
-    console.log(startIndex, endIndex);
-
-    const handlePageChange = (pageNumber) => {
-        // Calculate the new start index based on the clicked page number
-        const newStartIndex = (pageNumber - 1) * quantityOfItems;
-        setStartIndex(newStartIndex);
-      };
 
     const displayedItems = goods.slice(startIndex, endIndex);
 
@@ -295,7 +288,6 @@ const CatalogList = ({
                 onPageHandler={pageNumberHandler}
                 onPrev={prevPage}
                 onNext={nextPage}
-                onPrev={prevPage}
             />
         </div>
     );
