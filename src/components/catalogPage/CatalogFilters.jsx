@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+
 import filter from "../../icons/filter.png";
 import chevronDown from "../../icons/chevron-down.png";
 import chevronUp from "../../icons/chevron-up.png";
@@ -6,9 +7,10 @@ import itemInfo from "../../data/data";
 
 const CatalogFilters = ({ onPopularity, onType, onPriceFrom, onPriceTo }) => {
     const [showType, setShowType] = useState(false);
-    const [showPopularity, setShowPopularity] = useState(false);
+    const [showSort, setShowSort] = useState(false);
     const [typeValue, setTypeValue] = useState(null);
-    const [popularityValue, setPopularityValue] = useState(null);
+    const [checkedValue, setCheckedValue] = useState(null);
+    const [sortingValue, setSortingValue] = useState(null);
     const [priceFrom, setPriceFrom] = useState(0);
     const [priceTo, setPriceTo] = useState(
         Math.max(...itemInfo.map((item) => item.initialPrice))
@@ -28,14 +30,14 @@ const CatalogFilters = ({ onPopularity, onType, onPriceFrom, onPriceTo }) => {
 
     const resetFilters = () => {
         setTypeValue(null);
-        setPopularityValue(null);
+        setSortingValue(null);
         setPriceFrom(0);
         setPriceTo(Math.max(...itemInfo.map((item) => item.initialPrice)));
-    }
+    };
 
     useEffect(() => {
-        onPopularity(popularityValue);
-    }, [popularityValue]);
+        onPopularity(sortingValue);
+    }, [sortingValue]);
 
     useEffect(() => {
         onType(typeValue);
@@ -48,6 +50,8 @@ const CatalogFilters = ({ onPopularity, onType, onPriceFrom, onPriceTo }) => {
     useEffect(() => {
         onPriceTo(priceTo);
     }, [priceTo]);
+
+    const types = [1, 2, 3, 4, 5];
 
     return (
         <div className="catalogFilters">
@@ -98,7 +102,7 @@ const CatalogFilters = ({ onPopularity, onType, onPriceFrom, onPriceTo }) => {
                     </div>
                     {showType && (
                         <div className="params_type__body">
-                            {[1, 2, 3, 4, 5].map((value) => (
+                            {types.map((value) => (
                                 <div className="params_type__value" key={value}>
                                     <div className="params_type__checkbox">
                                         <input
@@ -129,56 +133,150 @@ const CatalogFilters = ({ onPopularity, onType, onPriceFrom, onPriceTo }) => {
                 <div className="params_type">
                     <div className="params_type__header">
                         <div className="params_type__title">
-                            <span>По популярности</span>
+                            <span>Сортировать</span>
                         </div>
                         <div
                             className="params_type__icon"
-                            onClick={() => setShowPopularity(!showPopularity)}
+                            onClick={() => setShowSort(!showSort)}
                         >
                             <img
-                                src={showPopularity ? chevronUp : chevronDown}
+                                src={showSort ? chevronUp : chevronDown}
                                 alt="Chevron"
                             />
                         </div>
                     </div>
-                    {showPopularity && (
+                    {showSort && (
                         <div className="params_type__body">
                             <div className="params_type__value">
                                 <div className="params_type__checkbox">
                                     <input
                                         type="checkbox"
-                                        id="asc"
-                                        checked={popularityValue === "asc"}
+                                        id="price"
+                                        checked={checkedValue === "price"}
                                         onChange={() =>
                                             handleCheck(
-                                                setPopularityValue,
-                                                popularityValue,
-                                                "asc"
+                                                setCheckedValue,
+                                                checkedValue,
+                                                "price"
                                             )
                                         }
                                     />
                                 </div>
                                 <div className="params_type__text">
-                                    <label htmlFor="asc">По возрастанию</label>
+                                    <label htmlFor="price">По цене</label>
                                 </div>
                             </div>
                             <div className="params_type__value">
                                 <div className="params_type__checkbox">
                                     <input
                                         type="checkbox"
-                                        id="desc"
-                                        checked={popularityValue === "desc"}
+                                        id="ascPrice"
+                                        checked={sortingValue === "ascPrice" && checkedValue === "price"}
                                         onChange={() =>
                                             handleCheck(
-                                                setPopularityValue,
-                                                popularityValue,
-                                                "desc"
+                                                setSortingValue,
+                                                sortingValue,
+                                                "ascPrice"
+                                            )
+                                        }
+                                        disabled={checkedValue === "popularity" || checkedValue === null}
+                                    />
+                                </div>
+                                <div className="params_type__text">
+                                    <label htmlFor="ascPrice">
+                                        По возрастанию
+                                    </label>
+                                </div>
+                            </div>
+                            <div className="params_type__value">
+                                <div className="params_type__checkbox">
+                                    <input
+                                        type="checkbox"
+                                        id="descPrice"
+                                        checked={sortingValue === "descPrice" && checkedValue === "price"}
+                                        onChange={() =>
+                                            handleCheck(
+                                                setSortingValue,
+                                                sortingValue,
+                                                "descPrice"
+                                            )
+                                        }
+                                        disabled={checkedValue === "popularity" || checkedValue === null}
+                                    />
+                                </div>
+                                <div className="params_type__text">
+                                    <label htmlFor="descPrice">
+                                        По убыванию
+                                    </label>
+                                </div>
+                            </div>
+                            <div className="params_type__value">
+                                <div className="params_type__checkbox">
+                                    <input
+                                        type="checkbox"
+                                        id="popularity"
+                                        checked={checkedValue === "popularity"}
+                                        onChange={() =>
+                                            handleCheck(
+                                                setCheckedValue,
+                                                checkedValue,
+                                                "popularity"
                                             )
                                         }
                                     />
                                 </div>
                                 <div className="params_type__text">
-                                    <label htmlFor="desc">По убыванию</label>
+                                    <label htmlFor="popularity">
+                                        По популярности
+                                    </label>
+                                </div>
+                            </div>
+                            <div className="params_type__value">
+                                <div className="params_type__checkbox">
+                                    <input
+                                        type="checkbox"
+                                        id="ascPopularity"
+                                        checked={
+                                            sortingValue === "ascPopularity" && checkedValue === "popularity"
+                                        }
+                                        onChange={() =>
+                                            handleCheck(
+                                                setSortingValue,
+                                                sortingValue,
+                                                "ascPopularity"
+                                            )
+                                        }
+                                        disabled={checkedValue === "price" || checkedValue === null}
+                                    />
+                                </div>
+                                <div className="params_type__text">
+                                    <label htmlFor="ascPopularity">
+                                        По возрастанию
+                                    </label>
+                                </div>
+                            </div>
+                            <div className="params_type__value">
+                                <div className="params_type__checkbox">
+                                    <input
+                                        type="checkbox"
+                                        id="descPopularity"
+                                        checked={
+                                            sortingValue === "descPopularity" && checkedValue === "popularity"
+                                        }
+                                        onChange={() =>
+                                            handleCheck(
+                                                setSortingValue,
+                                                sortingValue,
+                                                "descPopularity"
+                                            )
+                                        }
+                                        disabled={checkedValue === "price" || checkedValue === null}
+                                    />
+                                </div>
+                                <div className="params_type__text">
+                                    <label htmlFor="descPopularity">
+                                        По убыванию
+                                    </label>
                                 </div>
                             </div>
                         </div>
