@@ -76,48 +76,10 @@ const PageSelection = ({
     }, [priceFrom, priceTo, typeValue, popularityValue]);
 
     useEffect(() => {
-        switch (active) {
-            case "first-item":
-                setQuantityOfItems(5);
-                setStartIndex(0);
-                break;
-            case "second-item":
-                setQuantityOfItems(10);
-                setStartIndex(0);
-                break;
-            case "third-item":
-                setQuantityOfItems(15);
-                setStartIndex(0);
-                break;
-            default:
-                setQuantityOfItems(data.length);
-                setStartIndex(0);
-                break;
-        }
+        onQuantityHandler(active);
+        console.log('quantityHandler');
     }, [active]);
 
-    useEffect(() => {
-        setStartIndex((activePageNumber - 1) * quantityOfItems);
-    }, [activePageNumber]);
-
-    const endIndex = startIndex + quantityOfItems;
-    const totalPages = Math.ceil(goods.length / quantityOfItems);
-
-    const prevPage = () => {
-        if (activePageNumber > 1) {
-            setActivePageNumber(activePageNumber - 1);
-        }
-    };
-
-    const nextPage = () => {
-        if (activePageNumber < totalPages) {
-            setActivePageNumber(activePageNumber + 1);
-        }
-    };
-
-    useEffect(() => {
-        onDisplayGoods(goods.slice(startIndex, endIndex));
-    }, [goods, startIndex, endIndex]);
 
     const pageNumbers = [];
 
