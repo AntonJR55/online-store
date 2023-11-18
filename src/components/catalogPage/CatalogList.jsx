@@ -1,9 +1,4 @@
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-
-import PageSelection from "./PageSelection";
-
-import data from "../../data/data";
 
 import plus from "../../icons/plus.png";
 import minus from "../../icons/minus.png";
@@ -11,10 +6,7 @@ import whiteBasket from "../../icons/whiteBasket.png";
 import close from "../../icons/close.png";
 
 const CatalogList = ({
-    popularityValue,
-    typeValue,
-    priceFrom,
-    priceTo,
+    displayedItems,
     onAddToCard,
     showNotification,
     showToast,
@@ -23,94 +15,6 @@ const CatalogList = ({
     onShowDetailedCard,
     onCloseToast
 }) => {
-    const [startIndex, setStartIndex] = useState(0);
-    const [quantityOfItems, setQuantityOfItems] = useState(5);
-    const [goods, setGoods] = useState(data);
-
-    useEffect(() => {
-        const priceFilteredData = data.filter((item) => {
-            const itemPrice = item.initialPrice;
-            return (
-                itemPrice >= parseFloat(priceFrom) &&
-                itemPrice <= parseFloat(priceTo)
-            );
-        });
-
-        const typeFilteredData = priceFilteredData.filter((item) => {
-            switch (typeValue) {
-                case 1:
-                    return item.type === 1;
-                case 2:
-                    return item.type === 2;
-                case 3:
-                    return item.type === 3;
-                case 4:
-                    return item.type === 4;
-                case 5:
-                    return item.type === 5;
-                default:
-                    return true;
-            }
-        });
-
-        const popularitySortedData = typeFilteredData.slice(0); 
-
-        switch (popularityValue) {
-            case "asc":
-                popularitySortedData.sort((a, b) => a.popularity - b.popularity);
-                break;
-            case "desc":
-                popularitySortedData.sort((a, b) => b.popularity - a.popularity);
-                break;
-            default:
-                break;
-        }
-
-        setGoods(popularitySortedData);
-        setStartIndex(0);
-    }, [priceFrom, priceTo, typeValue, popularityValue]);
-
-    const quantityOfItemsHandler = (activeItem) => {
-        switch (activeItem) {
-            case "first-item":
-                setQuantityOfItems(5);
-                setStartIndex(0);
-                break;
-            case "second-item":
-                setQuantityOfItems(10);
-                setStartIndex(0);
-                break;
-            case "third-item":
-                setQuantityOfItems(15);
-                setStartIndex(0);
-                break;
-            default:
-                setQuantityOfItems(data.length);
-                setStartIndex(0);
-                break;
-        }
-    };
-
-    const prevPage = () => {
-        if (startIndex > 0) {
-            setStartIndex(startIndex - quantityOfItems);
-        }
-    };
-
-    const nextPage = () => {
-        if (endIndex < data.length) {
-            setStartIndex(startIndex + quantityOfItems);
-        }
-    };
-
-    const pageNumberHandler = (active) => {
-        setStartIndex((active - 1) * quantityOfItems);
-    }
-
-    const endIndex = startIndex + quantityOfItems;
-    const totalPages = Math.ceil(goods.length / quantityOfItems);
-
-    const displayedItems = goods.slice(startIndex, endIndex);
 
     return (
         <div className="catalogList">
@@ -282,13 +186,6 @@ const CatalogList = ({
                     </div>
                 </div>
             )}
-            <PageSelection
-                totalPages={totalPages}
-                onQuantityHandler={quantityOfItemsHandler}
-                onPageHandler={pageNumberHandler}
-                onPrev={prevPage}
-                onNext={nextPage}
-            />
         </div>
     );
 };

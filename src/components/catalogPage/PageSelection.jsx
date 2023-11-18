@@ -1,21 +1,85 @@
 import { useState, useEffect, Fragment } from "react";
 
+import data from "../../data/data";
+
 import arrowLeft from "../../icons/arrow-left.png";
 import arrowRight from "../../icons/arrow-right.png";
 
 const PageSelection = ({
-    totalPages,
-    onQuantityHandler,
-    onPageHandler,
-    onPrev,
-    onNext
+    popularityValue,
+    typeValue,
+    priceFrom,
+    priceTo,
+    onDisplayGoods,
 }) => {
+    const [goods, setGoods] = useState(data);
     const [active, setActive] = useState("first-item");
+    const [startIndex, setStartIndex] = useState(0);
+    const [quantityOfItems, setQuantityOfItems] = useState(5);
+    const [activePageNumber, setActivePageNumber] = useState(1);
+
+    useEffect(() => {
+        const priceFilteredData = data.filter((item) => {
+            const itemPrice = item.initialPrice;
+            return (
+                itemPrice >= parseFloat(priceFrom) &&
+                itemPrice <= parseFloat(priceTo)
+            );
+        });
+
+        const typeFilteredData = priceFilteredData.filter((item) => {
+            switch (typeValue) {
+                case 1:
+                    return item.type === 1;
+                case 2:
+                    return item.type === 2;
+                case 3:
+                    return item.type === 3;
+                case 4:
+                    return item.type === 4;
+                case 5:
+                    return item.type === 5;
+                default:
+                    return true;
+            }
+        });
+
+        const popularitySortedData = typeFilteredData.slice(0);
+
+        switch (popularityValue) {
+            case "ascPrice":
+                popularitySortedData.sort(
+                    (a, b) => a.initialPrice - b.initialPrice
+                );
+                break;
+            case "descPrice":
+                popularitySortedData.sort(
+                    (a, b) => b.initialPrice - a.initialPrice
+                );
+                break;
+            case "ascPopularity":
+                popularitySortedData.sort(
+                    (a, b) => a.popularity - b.popularity
+                );
+                break;
+            case "descPopularity":
+                popularitySortedData.sort(
+                    (a, b) => b.popularity - a.popularity
+                );
+                break;
+            default:
+                break;
+        }
+
+        setGoods(popularitySortedData);
+        setActivePageNumber(1);
+    }, [priceFrom, priceTo, typeValue, popularityValue]);
 
     useEffect(() => {
         onQuantityHandler(active);
-        console.log("quantityHandler");
+        console.log('quantityHandler');
     }, [active]);
+
 
     const pageNumbers = [];
 
@@ -24,9 +88,15 @@ const PageSelection = ({
             <div
                 key={i}
                 className="transition_pageNumbers-number"
-                onClick={() => onPageHandler(i + 1)}
+                onClick={() => setActivePageNumber(i + 1)}
             >
-                <span>{i + 1}</span>
+                <span
+                    style={{
+                        color: activePageNumber === i + 1 && "#000",
+                    }}
+                >
+                    {i + 1}
+                </span>
             </div>
         );
     }
@@ -82,13 +152,13 @@ const PageSelection = ({
             <div className="pageSelection_transition">
                 {pageNumbers.length > 1 ? (
                     <Fragment>
-                        <div className="transition_next" onClick={onPrev}>
+                        <div className="transition_next" onClick={prevPage}>
                             <img src={arrowLeft} alt="Arrow-left" />
                         </div>
                         <div className="transition_pageNumbers">
                             {pageNumbers}
                         </div>
-                        <div className="transition_prev" onClick={onNext}>
+                        <div className="transition_prev" onClick={nextPage}>
                             <img src={arrowRight} alt="Arrow-right" />
                         </div>
                     </Fragment>
