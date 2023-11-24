@@ -8,6 +8,8 @@ import search from "../../icons/search.png";
 const SearchPanel = ({ onShowDetailedCard }) => {
     const [term, setTerm] = useState("");
 
+    console.log(term);
+
     const updateSearch = (e) => {
         const item = e.target.value;
         setTerm(item);
@@ -25,6 +27,11 @@ const SearchPanel = ({ onShowDetailedCard }) => {
         }
     };
 
+    const displayDetailedCard = (item) => {
+        onShowDetailedCard(item);
+        setTerm("");
+    };
+
     const visibleData = searchItems(data, term);
 
     return (
@@ -36,6 +43,7 @@ const SearchPanel = ({ onShowDetailedCard }) => {
                 type="text"
                 className="searchPanel__input"
                 placeholder="Поиск по названию..."
+                value={term}
                 onChange={updateSearch}
             />
             {visibleData.map((item) => (
@@ -43,7 +51,7 @@ const SearchPanel = ({ onShowDetailedCard }) => {
                     key={item.id}
                     className="searchPanel__item"
                     to={`/item/${item.id}`}
-                    onClick={() => onShowDetailedCard(item)}
+                    onClick={() => displayDetailedCard(item)}
                 >
                     <div className="searchPanel__item_img">
                         <img src={item.image} alt="Item" />

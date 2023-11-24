@@ -4,8 +4,9 @@ import arrow from "../../icons/arrow.png";
 import plus from "../../icons/plus.png";
 import minus from "../../icons/minus.png";
 import whiteBasket from "../../icons/whiteBasket.png";
+import close from "../../icons/close.png";
 
-const ItemPage = ({ detailedCardItem }) => {
+const ItemPage = ({ detailedCardItem, showNotification, showToast, cardInNotification, onAddToCard, onCloseNotification, onCloseToast }) => {
     return (
         <div className="itemPage">
             <div className="container">
@@ -53,7 +54,7 @@ const ItemPage = ({ detailedCardItem }) => {
                                     </div>
                                 </div>
                                 <div className="item__addToBasket">
-                                    <button>
+                                    <button onClick={() => onAddToCard(item)}>
                                         <div className="item__addToBasket_img">
                                             <img
                                                 src={whiteBasket}
@@ -157,6 +158,60 @@ const ItemPage = ({ detailedCardItem }) => {
                     </div>
                 ))}
             </div>
+            {showNotification ? (
+                <div className="notification">
+                    <div className="notification__content">
+                        <div className="notification__header">
+                            <h3>Товар добавлен в корзину</h3>
+                        </div>
+                        <div className="notification__line">
+                            <div></div>
+                        </div>
+                        <div className="notification__body">
+                            <div className="notification__body_img">
+                                <img
+                                    src={cardInNotification.image}
+                                    alt="Item"
+                                />
+                            </div>
+                            <div className="notification__body_standard">
+                                <span>{cardInNotification.standard}</span>
+                            </div>
+                            <div className="notification__body_title">
+                                <span>{cardInNotification.title}</span>
+                            </div>
+                            <div className="notification__body_cost">
+                                <span>{cardInNotification.initialPrice}</span>
+                            </div>
+                            <div className="notification__body_continue">
+                                <button onClick={onCloseNotification}>
+                                    <span>Продолжить покупки</span>
+                                </button>
+                            </div>
+                            <Link
+                                className="notification__body_basket"
+                                to={`/basket`}
+                            >
+                                <button onClick={onCloseNotification}>
+                                    <span>Перейти в корзину</span>
+                                </button>
+                            </Link>
+                        </div>
+                    </div>
+                </div>
+            ) : (
+                ""
+            )}
+            {showToast && (
+                <div className="toast">
+                    <div className="toast__text">
+                        <span>Данный товар уже находится в корзине!</span>
+                    </div>
+                    <div className="toast__img" onClick={onCloseToast}>
+                        <img src={close} alt="Close" />
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

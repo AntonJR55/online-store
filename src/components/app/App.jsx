@@ -32,7 +32,7 @@ function App() {
 
     const closeToast = () => {
         setShowToast(false);
-    }
+    };
 
     const handleAddToCard = (itemInfo) => {
         if (!addedItems.includes(itemInfo.id)) {
@@ -44,7 +44,7 @@ function App() {
             setShowToast(true);
             setTimeout(() => {
                 setShowToast(false);
-            }, 3000); 
+            }, 3000);
         }
     };
 
@@ -134,7 +134,15 @@ function App() {
                                     cardItemLength={cardItemLength}
                                     onShowDetailedCard={showDetailedCardItem}
                                 />
-                                <ItemPage detailedCardItem={detailedCardItem} />
+                                <ItemPage
+                                    detailedCardItem={detailedCardItem}
+                                    onAddToCard={handleAddToCard}
+                                    showNotification={showNotification}
+                                    showToast={showToast}
+                                    cardInNotification={cardInNotification}
+                                    onCloseNotification={closeNotification}
+                                    onCloseToast={closeToast}
+                                />
                                 <Footer />
                             </>
                         }
