@@ -1,12 +1,16 @@
-import { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 
 import data from "../../data/data";
 
+import AppContext from "../context/AppContext";
+
 import search from "../../icons/search.png";
 
-const SearchPanel = ({ onShowDetailedCard }) => {
-    const [term, setTerm] = useState("");
+const SearchPanel = () => {
+    const [term, setTerm] = React.useState("");
+
+    const ctx = React.useContext(AppContext);
 
     console.log(term);
 
@@ -28,11 +32,12 @@ const SearchPanel = ({ onShowDetailedCard }) => {
     };
 
     const displayDetailedCard = (item) => {
-        onShowDetailedCard(item);
+        ctx.onShowDetailedCard(item);
         setTerm("");
     };
 
     const visibleData = searchItems(data, term);
+    const notFound = term.length > 0 && visibleData.length === 0;
 
     return (
         <div className="searchPanel">
@@ -46,26 +51,32 @@ const SearchPanel = ({ onShowDetailedCard }) => {
                 value={term}
                 onChange={updateSearch}
             />
-            {visibleData.map((item) => (
-                <Link
-                    key={item.id}
-                    className="searchPanel__item"
-                    to={`/item/${item.id}`}
-                    onClick={() => displayDetailedCard(item)}
-                >
-                    <div className="searchPanel__item_img">
-                        <img src={item.image} alt="Item" />
-                    </div>
-                    <div className="searchPanel__item_info">
-                        <div className="searchPanel__item_info-title">
-                            <span>{item.title}</span>
+            {!notFound ? (
+                visibleData.map((item) => (
+                    <Link
+                        key={item.id}
+                        className="searchPanel__item"
+                        to={`/item/${item.id}`}
+                        onClick={() => displayDetailedCard(item)}
+                    >
+                        <div className="searchPanel__item_img">
+                            <img src={item.image} alt="Item" />
                         </div>
-                        <div className="searchPanel__item_info-price">
-                            <span>{item.initialPrice}</span>
+                        <div className="searchPanel__item_info">
+                            <div className="searchPanel__item_info-title">
+                                <span>{item.title}</span>
+                            </div>
+                            <div className="searchPanel__item_info-price">
+                                <span>{item.initialPrice}</span>
+                            </div>
                         </div>
-                    </div>
-                </Link>
-            ))}
+                    </Link>
+                ))
+            ) : (
+                <div className="searchPanel__notFound">
+                    <span>Ничего не найдено</span>
+                </div>
+            )}
         </div>
     );
 };

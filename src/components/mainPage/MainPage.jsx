@@ -1,25 +1,17 @@
-import { Fragment  } from "react";
+import { Fragment } from "react";
 
 import Description from "./Description";
 import AreasOfActivity from "./AreasOfActivity";
 import PopularProducts from "./PopularProducts";
 
-const MainPage = ({ showNotification, showToast, cardInNotification, onAddToCard, onCloseNotification, onShowDetailedCard, onCloseToast }) => {
+const MainPage = () => {
     return (
         <Fragment>
             <Description />
             <AreasOfActivity />
-            <PopularProducts 
-                showNotification={showNotification}
-                showToast={showToast}
-                cardInNotification={cardInNotification}
-                onAddToCard={onAddToCard}
-                onShowDetailedCard={onShowDetailedCard}
-                onCloseNotification={onCloseNotification}
-                onCloseToast={onCloseToast}
-            />
+            <PopularProducts />
         </Fragment>
-    )
-}
+    );
+};
 
 export default MainPage;

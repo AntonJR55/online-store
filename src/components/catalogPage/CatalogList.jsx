@@ -1,20 +1,16 @@
+import React from "react";
 import { Link } from "react-router-dom";
+
+import AppContext from "../context/AppContext";
 
 import plus from "../../icons/plus.png";
 import minus from "../../icons/minus.png";
 import whiteBasket from "../../icons/whiteBasket.png";
 import close from "../../icons/close.png";
 
-const CatalogList = ({
-    displayedItems,
-    onAddToCard,
-    showNotification,
-    showToast,
-    cardInNotification,
-    onCloseNotification,
-    onShowDetailedCard,
-    onCloseToast
-}) => {
+const CatalogList = ({ displayedItems }) => {
+
+    const ctx = React.useContext(AppContext);
 
     return (
         <div className="catalogList">
@@ -112,7 +108,7 @@ const CatalogList = ({
                             </div>
                         </div>
                         <div className="addToBasket_basket">
-                            <button onClick={() => onAddToCard(item)}>
+                            <button onClick={() => ctx.onAddToCard(item)}>
                                 <div className="addToBasket_basket__img">
                                     <img src={whiteBasket} alt="Basket" />
                                 </div>
@@ -125,14 +121,14 @@ const CatalogList = ({
                             className="addToBasket_detailed"
                             to={`/item/${item.id}`}
                         >
-                            <button onClick={() => onShowDetailedCard(item)}>
+                            <button onClick={() => ctx.onShowDetailedCard(item)}>
                                 <span>Подробнее</span>
                             </button>
                         </Link>
                     </div>
                 </div>
             ))}
-            {showNotification ? (
+            {ctx.showNotification ? (
                 <div className="notification">
                     <div className="notification__content">
                         <div className="notification__header">
@@ -144,21 +140,21 @@ const CatalogList = ({
                         <div className="notification__body">
                             <div className="notification__body_img">
                                 <img
-                                    src={cardInNotification.image}
+                                    src={ctx.cardInNotification.image}
                                     alt="Item"
                                 />
                             </div>
                             <div className="notification__body_standard">
-                                <span>{cardInNotification.standard}</span>
+                                <span>{ctx.cardInNotification.standard}</span>
                             </div>
                             <div className="notification__body_title">
-                                <span>{cardInNotification.title}</span>
+                                <span>{ctx.cardInNotification.title}</span>
                             </div>
                             <div className="notification__body_cost">
-                                <span>{cardInNotification.initialPrice}</span>
+                                <span>{ctx.cardInNotification.initialPrice}</span>
                             </div>
                             <div className="notification__body_continue">
-                                <button onClick={onCloseNotification}>
+                                <button onClick={ctx.onCloseNotification}>
                                     <span>Продолжить покупки</span>
                                 </button>
                             </div>
@@ -166,7 +162,7 @@ const CatalogList = ({
                                 className="notification__body_basket"
                                 to={`/basket`}
                             >
-                                <button onClick={onCloseNotification}>
+                                <button onClick={ctx.onCloseNotification}>
                                     <span>Перейти в корзину</span>
                                 </button>
                             </Link>
@@ -176,12 +172,12 @@ const CatalogList = ({
             ) : (
                 ""
             )}
-            {showToast && (
+            {ctx.showToast && (
                 <div className="toast">
                     <div className="toast__text">
                         <span>Данный товар уже находится в корзине!</span>
                     </div>
-                    <div className="toast__img" onClick={onCloseToast}>
+                    <div className="toast__img" onClick={ctx.onCloseToast}>
                         <img src={close} alt="Close" />
                     </div>
                 </div>

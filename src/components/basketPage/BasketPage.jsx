@@ -1,6 +1,7 @@
 import React from "react";
-
 import { Link } from "react-router-dom";
+
+import AppContext from "../context/AppContext";
 
 import arrow from "../../icons/arrow.png";
 import plus from "../../icons/plus.png";
@@ -8,8 +9,10 @@ import minus from "../../icons/minus.png";
 import remove from "../../icons/remove.png";
 import ContactsForm from "./ContactsForm";
 
-const BasketPage = ({ cardItem, onDeleteItem, onDeleteItemsAll }) => {
-    const [data, setData] = React.useState(cardItem);
+const BasketPage = () => {
+    const ctx = React.useContext(AppContext);
+
+    const [data, setData] = React.useState(ctx.cardItem);
     const [totalPrice, setTotalPrice] = React.useState(0);
 
     React.useEffect (() => {
@@ -35,12 +38,12 @@ const BasketPage = ({ cardItem, onDeleteItem, onDeleteItemsAll }) => {
         setData((prevData) =>
             prevData.filter(item => item.id !== itemId) 
         );
-        onDeleteItem(itemId);
+        ctx.onDeleteItem(itemId);
     }
 
     const deleteItemsAll = () => {
         setData([]);
-        onDeleteItemsAll();
+        ctx.onDeleteItemsAll();
     }
 
     return (

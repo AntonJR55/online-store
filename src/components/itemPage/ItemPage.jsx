@@ -1,4 +1,7 @@
+import React from "react";
 import { Link } from "react-router-dom";
+
+import AppContext from "../context/AppContext";
 
 import arrow from "../../icons/arrow.png";
 import plus from "../../icons/plus.png";
@@ -6,7 +9,10 @@ import minus from "../../icons/minus.png";
 import whiteBasket from "../../icons/whiteBasket.png";
 import close from "../../icons/close.png";
 
-const ItemPage = ({ detailedCardItem, showNotification, showToast, cardInNotification, onAddToCard, onCloseNotification, onCloseToast }) => {
+const ItemPage = () => {
+
+    const ctx = React.useContext(AppContext);
+
     return (
         <div className="itemPage">
             <div className="container">
@@ -21,7 +27,7 @@ const ItemPage = ({ detailedCardItem, showNotification, showToast, cardInNotific
                         <span>Товар</span>
                     </div>
                 </div>
-                {detailedCardItem.map((item) => (
+                {ctx.detailedCardItem.map((item) => (
                     <div className="itemPage__item">
                         <div className="item__header">
                             <div className="item__img">
@@ -54,7 +60,7 @@ const ItemPage = ({ detailedCardItem, showNotification, showToast, cardInNotific
                                     </div>
                                 </div>
                                 <div className="item__addToBasket">
-                                    <button onClick={() => onAddToCard(item)}>
+                                    <button onClick={() => ctx.onAddToCard(item)}>
                                         <div className="item__addToBasket_img">
                                             <img
                                                 src={whiteBasket}
@@ -158,7 +164,7 @@ const ItemPage = ({ detailedCardItem, showNotification, showToast, cardInNotific
                     </div>
                 ))}
             </div>
-            {showNotification ? (
+            {ctx.showNotification ? (
                 <div className="notification">
                     <div className="notification__content">
                         <div className="notification__header">
@@ -170,21 +176,21 @@ const ItemPage = ({ detailedCardItem, showNotification, showToast, cardInNotific
                         <div className="notification__body">
                             <div className="notification__body_img">
                                 <img
-                                    src={cardInNotification.image}
+                                    src={ctx.cardInNotification.image}
                                     alt="Item"
                                 />
                             </div>
                             <div className="notification__body_standard">
-                                <span>{cardInNotification.standard}</span>
+                                <span>{ctx.cardInNotification.standard}</span>
                             </div>
                             <div className="notification__body_title">
-                                <span>{cardInNotification.title}</span>
+                                <span>{ctx.cardInNotification.title}</span>
                             </div>
                             <div className="notification__body_cost">
-                                <span>{cardInNotification.initialPrice}</span>
+                                <span>{ctx.cardInNotification.initialPrice}</span>
                             </div>
                             <div className="notification__body_continue">
-                                <button onClick={onCloseNotification}>
+                                <button onClick={ctx.onCloseNotification}>
                                     <span>Продолжить покупки</span>
                                 </button>
                             </div>
@@ -192,7 +198,7 @@ const ItemPage = ({ detailedCardItem, showNotification, showToast, cardInNotific
                                 className="notification__body_basket"
                                 to={`/basket`}
                             >
-                                <button onClick={onCloseNotification}>
+                                <button onClick={ctx.onCloseNotification}>
                                     <span>Перейти в корзину</span>
                                 </button>
                             </Link>
@@ -202,12 +208,12 @@ const ItemPage = ({ detailedCardItem, showNotification, showToast, cardInNotific
             ) : (
                 ""
             )}
-            {showToast && (
+            {ctx.showToast && (
                 <div className="toast">
                     <div className="toast__text">
                         <span>Данный товар уже находится в корзине!</span>
                     </div>
-                    <div className="toast__img" onClick={onCloseToast}>
+                    <div className="toast__img" onClick={ctx.onCloseToast}>
                         <img src={close} alt="Close" />
                     </div>
                 </div>

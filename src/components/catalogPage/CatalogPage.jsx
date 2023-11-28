@@ -8,15 +8,7 @@ import CatalogFilters from "./CatalogFilters";
 import CatalogList from "./CatalogList";
 import PageSelection from "./PageSelection";
 
-const CatalogPage = ({
-    onAddToCard,
-    showNotification,
-    showToast,
-    cardInNotification,
-    onCloseNotification,
-    onShowDetailedCard,
-    onCloseToast,
-}) => {
+const CatalogPage = () => {
     const [displayedItems, setDisplayedItems] = useState(data);
     const [popularityValue, setPopularityValue] = useState(null);
     const [typeValue, setTypeValue] = useState(null);
@@ -69,16 +61,7 @@ const CatalogPage = ({
                     />
                 </div>
                 <div className="catalogPage_items">
-                    <CatalogList
-                        displayedItems={displayedItems}
-                        onAddToCard={onAddToCard}
-                        showNotification={showNotification}
-                        showToast={showToast}
-                        cardInNotification={cardInNotification}
-                        onCloseNotification={onCloseNotification}
-                        onShowDetailedCard={onShowDetailedCard}
-                        onCloseToast={onCloseToast}
-                    />
+                    <CatalogList displayedItems={displayedItems} />
                     <PageSelection
                         onDisplayGoods={displayGoods}
                         popularityValue={popularityValue}

@@ -1,13 +1,19 @@
+import React from 'react';
 import { Link } from 'react-router-dom';
 
 import SearchPanel from '../UI/SearchPanel';
+
+import AppContext from "../context/AppContext";
 
 import logo from '../../icons/logo.png';
 import square from '../../icons/catalog.png';
 import star from '../../icons/star.png';
 import basket from '../../icons/basket.png';
 
-const Subheader = ({ cardItemLength, onShowDetailedCard }) => {
+const Subheader = () => {
+
+    const ctx = React.useContext(AppContext);
+
     return (
         <div className="container">
             <div className="subheader">
@@ -23,7 +29,7 @@ const Subheader = ({ cardItemLength, onShowDetailedCard }) => {
                     </div>
                     <button>Каталог</button>
                 </Link>
-                <SearchPanel onShowDetailedCard={onShowDetailedCard} />
+                <SearchPanel />
                 <div className="subheader__button">
                     <button>Заказать звонок</button>
                 </div>
@@ -41,7 +47,7 @@ const Subheader = ({ cardItemLength, onShowDetailedCard }) => {
                         <img src={basket} alt="basket" />
                     </div>
                     <div className="subheader__basket_circle">
-                        <p>{cardItemLength}</p>
+                        <p>{ctx.cardItemLength}</p>
                     </div>
                     <div className="subheader__basket_title">
                         <p>Корзина</p>
