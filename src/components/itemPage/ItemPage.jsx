@@ -8,6 +8,9 @@ import plus from "../../icons/plus.png";
 import minus from "../../icons/minus.png";
 import whiteBasket from "../../icons/whiteBasket.png";
 import close from "../../icons/close.png";
+import AddButton from "../UI/AddButton";
+import Notification from "../UI/Notification";
+import Toast from "../UI/Toast";
 
 const ItemPage = () => {
 
@@ -60,17 +63,7 @@ const ItemPage = () => {
                                     </div>
                                 </div>
                                 <div className="item__addToBasket">
-                                    <button onClick={() => ctx.onAddToCard(item)}>
-                                        <div className="item__addToBasket_img">
-                                            <img
-                                                src={whiteBasket}
-                                                alt="Basket"
-                                            />
-                                        </div>
-                                        <div className="item__addToBasket_text">
-                                            <span>В корзину</span>
-                                        </div>
-                                    </button>
+                                   <AddButton item={item} />
                                 </div>
                             </div>
                         </div>
@@ -165,58 +158,12 @@ const ItemPage = () => {
                 ))}
             </div>
             {ctx.showNotification ? (
-                <div className="notification">
-                    <div className="notification__content">
-                        <div className="notification__header">
-                            <h3>Товар добавлен в корзину</h3>
-                        </div>
-                        <div className="notification__line">
-                            <div></div>
-                        </div>
-                        <div className="notification__body">
-                            <div className="notification__body_img">
-                                <img
-                                    src={ctx.cardInNotification.image}
-                                    alt="Item"
-                                />
-                            </div>
-                            <div className="notification__body_standard">
-                                <span>{ctx.cardInNotification.standard}</span>
-                            </div>
-                            <div className="notification__body_title">
-                                <span>{ctx.cardInNotification.title}</span>
-                            </div>
-                            <div className="notification__body_cost">
-                                <span>{ctx.cardInNotification.initialPrice}</span>
-                            </div>
-                            <div className="notification__body_continue">
-                                <button onClick={ctx.onCloseNotification}>
-                                    <span>Продолжить покупки</span>
-                                </button>
-                            </div>
-                            <Link
-                                className="notification__body_basket"
-                                to={`/basket`}
-                            >
-                                <button onClick={ctx.onCloseNotification}>
-                                    <span>Перейти в корзину</span>
-                                </button>
-                            </Link>
-                        </div>
-                    </div>
-                </div>
+                <Notification />
             ) : (
                 ""
             )}
             {ctx.showToast && (
-                <div className="toast">
-                    <div className="toast__text">
-                        <span>Данный товар уже находится в корзине!</span>
-                    </div>
-                    <div className="toast__img" onClick={ctx.onCloseToast}>
-                        <img src={close} alt="Close" />
-                    </div>
-                </div>
+                <Toast />
             )}
         </div>
     );
